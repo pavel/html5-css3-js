@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML5, CSS3, JavaScript</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/github.css">
+        <link rel="stylesheet" type="text/css" href="styles/index.css">
+    </head>
+    <body>
+        <section class="slide" id="home">
+            <ol>
+                <li><a href="#go/js">JavaScript: overview</a></li>
+                <li><a href="#go/js-ideas">JavaScript: Key Ideas</a></li>
+                <li><a href="#go/js-values">JavaScript: Values</a></li>
+                <li><a href="#go/js-numbers">JavaScript: Numbers</a></li>
+                <li><a href="#go/js-nan">JavaScript: NaN</a></li>
+                <li><a href="#go/js-work-num">JavaScript: Working with numbers</a></li>
+                <li><a href="#go/js-strings">JavaScript: Strings</a></li>
+                <li><a href="#go/js-bools">JavaScript: Booleans</a></li>
+                <li><a href="#go/js-null-undefined">JavaScript: null, undefined</a></li>
+                <li><a href="#go/js-falsy-truthy">JavaScript: Falsy and truthy values</a></li>
+                <li><a href="#go/js-objects">JavaScript: Objects</a></li>
+                <li><a href="#go/js-ids">JavaScript: IDs</a></li>
+                <li><a href="#go/js-reserved">JavaScript: Reserved words</a></li>
+                <li><a href="#go/js-eq">JavaScript: ==, !=</a></li>
+                <li><a href="#go/js-plus-op">JavaScript: Plus operator</a></li>
+                <li><a href="#go/js-guard-op">JavaScript: Guard operator</a></li>
+                <li><a href="#go/js-default-op">JavaScript: Default operator</a></li>
+                <li><a href="#go/js-with">JavaScript: With statement</a></li>
+                <li><a href="#go/js-var">JavaScript: Var statement</a></li>
+                <li><a href="#go/js-funcs">JavaScript: Functions</a></li>
+                <li><a href="#go/js-scope">JavaScript: Scope</a></li>
+                <li><a href="#go/js-return">JavaScript: Return</a></li>
+                <li><a href="#go/js-obj-literals">JavaScript: Object literals</a></li>
+                <li><a href="#go/js-more">JavaScript: More</a></li>
+                <li><a href="#go/outro">Goodbye</a></li>
+            </ol>
+        </section>
+        <section class="slide" id="js">
+            <header>JavaScript: overview</header>
+            <ul>
+                <li><a href="#go/js-java">JavaScript and Java</a></li>
+                <li><a href="#go/js-ecma">JavaScript and the ECMAScript specification</a></li>
+                <li><a href="#go/js-study">Studying JavaScript</a></li>
+            </ul>
+        </section>
+        <section class="slide" id="js-java">
+            <header><i class="icon-warning-sign"></i> JavaScript has nothing to do with Java! Seriously!</header>
+        </section>
+        <section class="slide" id="js-ecma">
+            <ul>
+                <li>ECMA</li>
+                <li>Standardized version of JavaScript, called ECMAScript</li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/JavaScript_Overview">
+                    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/JavaScript_Overview
+                </a>
+            </ul>
+        </section>
+        <section class="slide" id="js-study">
+            <header>Gurus, books, resources</header>
+            <ul>
+                <li>
+                    Douglas Crockford <a href="http://crockford.com/">http://crockford.com/</a>
+                    <i class="icon-youtube-sign icon-large"></i>
+                </li>
+                <li>JavaScript: The Definitive Guide, 5th Edition (by David Flanagan)</li>
+                <li>JavaScript: The Good Parts (by Douglas Crockford)</li>
+                <li>Mozilla Developer Network (MDN) <a href="https://developer.mozilla.org/">https://developer.mozilla.org/</a></li>
+            </ul>
+        </section>
+        <section class="slide" id="js-ideas">
+            <header><i class="icon-key"></i> Key Ideas</header>
+            <ul>
+                <li>Load and go delivery</li>
+                <li>Loose typing</li>
+                <li>Objects <i class="icon-star"></i></li>
+                <li>Prototypal inheritance <i class="icon-star"></i></li>
+                <li>Lambda <i class="icon-star"></i></li>
+                <li>Linkage through global variables</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-values">
+            <header>Values</header>
+            <ul>
+                <li>Numbers</li>
+                <li>Strings</li>
+                <li>Booleans</li>
+                <li>Objects</li>
+                <li>null</li>
+                <li>undefined</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-numbers">
+            <header>Numbers</header>
+            <ul>
+                <li>Only one number type</li>
+                <li>64-bit floating point</li>
+                <li>0.1 + 0.2 === 0.30000000000000004</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-nan">
+            <header>NaN</header>
+            <ul>
+                <li>Special number: Not a Number</li>
+                <li>typeof NaN is "number"</li>
+                <li><i class="icon-warning-sign"></i> Any operation with NaN as an input results in NaN.</li>
+                <li>NaN == NaN is false</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-work-num">
+            <header>Working with numbers</header>
+            <ul>
+                <li>Number(value)</li>
+                <li>parseInt(value, radix)</li>
+                <li>Number("1notanumber") is NaN</li>
+                <li>parseInt("1notanumber", 10) is 1</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-strings">
+            <header>Strings</header>
+            <ul>
+                <li>No character type</li>
+                <li>Strings are immutable</li>
+                <li>Similar strings are equal (==)</li>
+                <li>'string' "string"</li>
+                <li>string.length</li>
+                <li>String(value)</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-bools">
+            <header>Booleans</header>
+            <ul>
+                <li>true</li>
+                <li>false</li>
+                <li>
+                    Boolean(value) similar to !! prefix<br>
+                    returns true for truthy values<br>
+                    returns false for falsy values
+                 </li>
+            </ul>
+        </section>
+        <section class="slide" id="js-null-undefined">
+            <header>null, undefined</header>
+            <ul>
+                <li>null - a value isn't anything</li>
+                <li>
+                    undefined - a value is not defined<br>
+                    default value for variables and parameters<br>
+                    the value of missing members in objects
+                </li>
+            </ul>
+        </section>
+        <section class="slide" id="js-falsy-truthy">
+            <header>Falsy and truthy values</header>
+            <ul>
+                <li>false</li>
+                <li>null</li>
+                <li>undefined</li>
+                <li>"" (empty string)</li>
+                <li>0</li>
+                <li>NaN</li>
+            </ul><br>
+            <i class="icon-info-sign"></i> All other values (including objects) are truthy.
+        </section>
+        <section class="slide" id="js-objects">
+            <header>Objects</header>
+            <ul>
+                <li>Everything (else) is an object.</li>
+                <li>Objects like Hashtables</li>
+                <li>Objects are dynamic</li>
+                <li>Objects inherit from objects</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-ids">
+            <header>Identifiers</header>
+            <ul>
+                <li>Starts with a letter or _ or $</li>
+                <li>
+                    By convention ids start with lower case<br>
+                    Except for constructor functions which start with upper case
+                </li>
+            </ul>
+        </section>
+        <section class="slide" id="js-reserved">
+            <header>Reserved words</header>
+<pre><code class="javascript">
+break, do, instanceof, typeof, case, else, new, var, catch, finally, return,
+void, continue, for, switch, while, debugger, function, this, with, default,
+if, throw, delete, in, try
+
+class, enum, extends, super, const, export, import
+implements, interface, let, package, private, protected, public, static, yield
+</code></pre>
+        </section>
+<section class="slide" id="js-eq">
+            <header>==, !=</header>
+            <ul>
+                <li>These operators can do type coercion</li>
+                <li>===, !== don't do type coercion</li>
+            </ul>
+<pre><code class="javascript">
+(2 == '2') == true;
+(2 === '2') == false;
+</code></pre>
+        </section>
+        <section class="slide" id="js-plus-op">
+            <header>+ operator</header>
+            <ul>
+                <li>
+                    Adds or concats<br>
+                </li>
+<pre><code class="javascript">
+"$" + 3 + 4 == "$34"
+</code></pre>
+
+                <li>
+                    Unary operator can convert strings to numbers<br>
+<pre><code class="javascript">
++"24" == 24;
++"3" + (+"4") == 7;
+</code></pre>
+                </li>
+            </ul>
+        </section>
+        <section class="slide" id="js-guard-op">
+            <header>Guard operator</header>
+            <ul>
+                <li>aka <em>logical and</em></li>
+                <li>
+                    If first operand is truthy<br>
+                    then result is second operand<br>
+                    else result is first operand
+                </li>
+                <li>
+<code class="javascript">
+    if (a) {
+        return a.number;
+    } else {
+        return a;
+    }
+</code>
+                </li>
+                <li>can be written as</li>
+                <li>
+<code class="javascript">
+    return a && a.number;
+</code>
+                </li>
+            </ul>
+        </section>
+        <section class="slide" id="js-default-op">
+            <header>Default operator</header>
+            <ul>
+                <li>aka <em>logical or</em></li>
+                <li>
+                    If first operand is truthy<br>
+                    then result is first operand<br>
+                    else result is second operand
+                </li>
+            </ul>
+<pre><code class="javascript">
+function greet(name) {
+    return 'Hello ' + (name || 'anonymous') + '!';
+}
+</code></pre>
+        </section>
+        <section class="slide" id="js-with">
+            <header>With statement</header>
+<pre><code class="javascript">
+with (o) {
+    member = null;
+}
+</code></pre>
+            <ul>
+                <li>
+                    What this claims to be:<br>
+                </li>
+            </ul>
+<pre><code class="javascript">o.member = null;</code></pre>
+            <ul>
+                <li>
+                    What if there's a global variable <em>member</em>?
+                </li>
+            </ul><br>
+            <i class="icon-warning-sign"></i> Really bad idea to use, unless you know what you're doing
+        </section>
+        <section class="slide" id="js-var">
+            <header>Var statement</header>
+            <ul>
+                <li>Defines variables within a function</li>
+                <li>Types are not specified</li>
+                <li>
+                    Initial values are optional
+                </li>
+<pre><code class="javascript">
+/* Example #1 */
+var name;
+var sum = 0;
+var a, b, c;
+var d = 'sup?', e;
+</code></pre>
+<pre><code class="javascript">
+/* Example #2 */
+var a = x; // no error
+var x = 3;
+</code></pre>
+<pre><code class="javascript">
+// Example #3
+var a, x;
+a = x;
+x = 3;
+</code></pre>
+            </ul>
+        </section>
+        <section class="slide" id="js-funcs">
+            <header>Functions</header>
+            <ul>
+                <li>Declaration:</li>
+            </ul>
+<pre><code class="javascript">
+    // Way #1
+    function sum(a, b, c) {
+        return a + b + c;
+    }
+    // Way #2
+    var sum = function (a, b, c) {
+        return a + b + c;
+    };
+    sum(1, 2, 3);
+</code></pre>
+        </section>
+        <section class="slide" id="js-scope">
+            <header><i class="icon-warning-sign"></i> Scope</header>
+            <ul>
+                <li>In JavaScript, {blocks} don't have scope</li>
+                <li>Only functions have scope</li>
+                <li>Variables defined in a function are not visible outside of the function.</li>
+            </ul>
+<pre><code class="javascript">
+    var a = 2;
+    if (condition) {
+        var a = 3;
+    }
+    // a == 3
+</code></pre>
+<pre><code class="javascript">
+    var a = 2;
+    function func() {
+        var a = 3;
+    }
+    // a == 2
+</code></pre>
+        </section>
+        <section class="slide" id="js-return">
+            <header>Return</header>
+<pre><code class="javascript">return expression;</code></pre>
+            <p>or</p>
+<pre><code class="javascript">return;</code></pre>
+            <ul>
+                <li>If there's no expression ther result is <strong>undefined</strong></li>
+                <li>Every function returns a value, no void-like thing</li>
+                <li>Except for constructor functions, whose default value is <strong>this</strong></li>
+            </ul>
+<pre><code class="javascript">
+    function noop() {}
+    noop(); // == undefined
+</code></pre>
+        </section>
+        <section class="slide" id="js-obj-literals">
+            <header>Object literals</header>
+<pre><code class="javascript">var empty = {};</code></pre>
+<pre><code class="javascript">var person = {name : 'Fred', surname: 'Bell'};
+var name = person.name;
+var surname = person['surname'];
+</code></pre>
+<pre><code class="javascript">
+// Maker function
+function person(name, surname) {
+    return {
+        name: name,
+        surname: surname
+    };
+}
+var fred = person('Fred', 'Bell');
+fred.friend = person('Mike', 'Palmer');
+</code></pre>
+<pre><code class="javascript">
+someFunction({
+    name : 'Fred',
+    surname : 'Bell',
+    friend : {
+        name : 'Mike',
+        surname : 'Palmer'
+    }
+});
+</code></pre>
+<i class="icon-warning-sign"></i> Exceptions. ORLY?
+<pre><code class="javascript">
+throw {
+    type : 'AJAX error',
+    message : '404 Resource not found'
+};
+</code></pre>
+        </section>
+        <section class="slide" id="js-more">
+            <ul>
+                <li>
+                    Douglas Crockford: The JavaScript Programming Language<br>
+                    <a href="http://www.youtube.com/watch?v=v2ifWcnQs6M">http://www.youtube.com/watch?v=v2ifWcnQs6M</a>
+                    <i class="icon-youtube-sign icon-large"></i>
+                </li>
+            </ul>
+        </section>
+        <section class="slide" id="outro">
+            <header>Outro</header>
+            <p>Bye, bye!</p>
+        </section>
+        <footer>
+            <a href="javascript:void(0)" id="prev"><i class="icon-chevron-left"></i></a>
+            <a href="#go/home"><i class="icon-home icon-2x"></i></a>
+            <a href="javascript:void(0)" id="next"><i class="icon-chevron-right"></i></a><br>
+            <i class="icon-time"></i> <span id="time"></span>
+        </footer>
+        <script src="scripts/jquery-2.0.3.min.js"></script>
+        <script src="scripts/routie.min.js"></script>
+        <script src="scripts/mousetrap.min.js"></script>
+        <script src="scripts/nav.js"></script>
+        <script src="scripts/time.js"></script>
+        <script src="scripts/highlight.pack.js"></script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </body>
+</html>
