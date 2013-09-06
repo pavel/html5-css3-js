@@ -31,7 +31,7 @@ a.disabled:hover > i {
     left: -120%;
     z-index: -1;
     transition: all 1s ease;
-    margin-top: 15vh;
+    margin-top: 10vh;
     margin-left: 30vw;
     width: 800px;
     border: 2px solid #888;
@@ -51,6 +51,10 @@ a.disabled:hover > i {
     margin: 0px 0px 0px 20px;
     padding: 0;
 }
+footer {
+    font-size: 0.8em;
+    position: fixed;
+}
 footer a {
     color: black;
     text-decoration: none;
@@ -59,10 +63,11 @@ footer a {
 footer a:hover {
     color: black;
 }
-footer {
-    font-size: 0.8em;
-}
 pre code {
     font-size: 0.85em;
     padding: 0;
+}
+#home {
+    margin-top: 20px;
+    overflow-y: auto;
 }

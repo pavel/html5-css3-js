@@ -17,8 +17,8 @@
                 <li><a href="#go/js-nan">JavaScript: NaN</a></li>
                 <li><a href="#go/js-work-num">JavaScript: Working with numbers</a></li>
                 <li><a href="#go/js-strings">JavaScript: Strings</a></li>
-                <li><a href="#go/js-bools">JavaScript: Booleans</a></li>
                 <li><a href="#go/js-null-undefined">JavaScript: null, undefined</a></li>
+                <li><a href="#go/js-bools">JavaScript: Booleans</a></li>
                 <li><a href="#go/js-falsy-truthy">JavaScript: Falsy and truthy values</a></li>
                 <li><a href="#go/js-objects">JavaScript: Objects</a></li>
                 <li><a href="#go/js-ids">JavaScript: IDs</a></li>
@@ -33,6 +33,21 @@
                 <li><a href="#go/js-scope">JavaScript: Scope</a></li>
                 <li><a href="#go/js-return">JavaScript: Return</a></li>
                 <li><a href="#go/js-obj-literals">JavaScript: Object literals</a></li>
+                <li><a href="#go/js-linkage">JavaScript: Linkage and prototypal inheritance</a></li>
+                <li><a href="#go/js-obj-methods">JavaScript: Object methods</a></li>
+                <li><a href="#go/js-constructors">JavaScript: Constructor functions</a></li>
+                <li><a href="#go/js-obj-create">JavaScript: Object.create</a></li>
+                <li><a href="#go/js-obj-ref">JavaScript: Reference</a></li>
+                <li><a href="#go/js-delete">JavaScript: Delete</a></li>
+                <li><a href="#go/js-arrays">JavaScript: Arrays</a></li>
+                <li><a href="#go/js-get-type">JavaScript: Determining the type</a></li>
+                <li><a href="#go/js-using-funcs">JavaScript: Using functions</a></li>
+                <li><a href="#go/js-funcs-decl">JavaScript: Function declaration WATS?!</a></li>
+                <li><a href="#go/js-inner-funcs">JavaScript: Inner functions and closures</a></li>
+                <li><a href="#go/js-func-objs">JavaScript: Function objects</a></li>
+                <li><a href="#go/js-funcs-more">JavaScript: More on functions</a></li>
+                <li><a href="#go/js-type-augment">JavaScript: Augmenting Built-in Types</a></li>
+                <li><a href="#go/js-inherit">JavaScript: Inheritance</a></li>
                 <li><a href="#go/js-more">JavaScript: More</a></li>
                 <li><a href="#go/outro">Goodbye</a></li>
             </ol>
@@ -96,26 +111,30 @@
             <ul>
                 <li>Only one number type</li>
                 <li>64-bit floating point</li>
-                <li>0.1 + 0.2 === 0.30000000000000004</li>
             </ul>
+<pre><code class="javascript">0.1 + 0.2 === 0.30000000000000004;</code></pre>
         </section>
         <section class="slide" id="js-nan">
             <header>NaN</header>
             <ul>
                 <li>Special number: Not a Number</li>
-                <li>typeof NaN is "number"</li>
-                <li><i class="icon-warning-sign"></i> Any operation with NaN as an input results in NaN.</li>
-                <li>NaN == NaN is false</li>
             </ul>
+<pre><code class="javascript">typeof NaN == "number"</code></pre>
+            <ul>
+                <li><i class="icon-warning-sign"></i> Any operation with NaN as an input results in NaN.</li>
+            </ul>
+<pre><code class="javascript">NaN == NaN; // false</code></pre>
         </section>
         <section class="slide" id="js-work-num">
             <header>Working with numbers</header>
-            <ul>
-                <li>Number(value)</li>
-                <li>parseInt(value, radix)</li>
-                <li>Number("1notanumber") is NaN</li>
-                <li>parseInt("1notanumber", 10) is 1</li>
-            </ul>
+<pre><code class="javascript">
+Number(value);
+parseInt(value, radix);
+</code></pre>
+<pre><code class="javascript">
+Number("1notanumber") == NaN;
+parseInt("1notanumber", 10) == 1;
+</code></pre>
         </section>
         <section class="slide" id="js-strings">
             <header>Strings</header>
@@ -123,22 +142,12 @@
                 <li>No character type</li>
                 <li>Strings are immutable</li>
                 <li>Similar strings are equal (==)</li>
-                <li>'string' "string"</li>
-                <li>string.length</li>
-                <li>String(value)</li>
             </ul>
-        </section>
-        <section class="slide" id="js-bools">
-            <header>Booleans</header>
-            <ul>
-                <li>true</li>
-                <li>false</li>
-                <li>
-                    Boolean(value) similar to !! prefix<br>
-                    returns true for truthy values<br>
-                    returns false for falsy values
-                 </li>
-            </ul>
+<pre><code class="javascript">
+'string' "string";
+string.length;
+String(value);
+</code></pre>
         </section>
         <section class="slide" id="js-null-undefined">
             <header>null, undefined</header>
@@ -149,6 +158,18 @@
                     default value for variables and parameters<br>
                     the value of missing members in objects
                 </li>
+            </ul>
+        </section>
+        <section class="slide" id="js-bools">
+            <header>Booleans</header>
+            <ul>
+                <li>true</li>
+                <li>false</li>
+                <li>
+                    Boolean(value) similar to <strong>!!</strong> prefix<br>
+                    returns true for truthy values<br>
+                    returns false for falsy values
+                 </li>
             </ul>
         </section>
         <section class="slide" id="js-falsy-truthy">
@@ -232,22 +253,20 @@ implements, interface, let, package, private, protected, public, static, yield
                     then result is second operand<br>
                     else result is first operand
                 </li>
-                <li>
-<code class="javascript">
-    if (a) {
-        return a.number;
-    } else {
-        return a;
-    }
-</code>
-                </li>
-                <li>can be written as</li>
-                <li>
-<code class="javascript">
-    return a && a.number;
-</code>
-                </li>
             </ul>
+<pre><code class="javascript">
+if (a) {
+    return a.number;
+} else {
+    return a;
+}
+</code></pre>
+            <ul>
+                <li>can be written as</li>
+            </ul>
+<pre><code class="javascript">
+return a && a.number;
+</code></pre>
         </section>
         <section class="slide" id="js-default-op">
             <header>Default operator</header>
@@ -319,15 +338,15 @@ x = 3;
                 <li>Declaration:</li>
             </ul>
 <pre><code class="javascript">
-    // Way #1
-    function sum(a, b, c) {
-        return a + b + c;
-    }
-    // Way #2
-    var sum = function (a, b, c) {
-        return a + b + c;
-    };
-    sum(1, 2, 3);
+// Way #1
+function sum(a, b, c) {
+    return a + b + c;
+}
+// Way #2
+var sum = function (a, b, c) {
+    return a + b + c;
+};
+sum(1, 2, 3);
 </code></pre>
         </section>
         <section class="slide" id="js-scope">
@@ -403,7 +422,385 @@ throw {
 };
 </code></pre>
         </section>
+        <section class="slide" id="js-linkage">
+            <header>Linkage and prototypal inheritance</header>
+            <ul>
+                <li>Objects created are similar to existing objects, but can be customized</li>
+                <li>Object customization is a lot less work than making a class, and less overhead, too.</li>
+                <li>Object may have a link to its prototype</li>
+                <li>Default prototype (if not specified) for an object is Object.prototype</li>
+                <li>Prototype is set during object creation</li>
+                <li>Can't change the link to a prototype of an object dynamically (in a standard way)</li>
+                <li>Storing to an object goes to that object</li>
+            </ul>
+<pre><code class="javascript">
+function person(name, surname) {
+    return {
+        name : name,
+        surname : surname
+    };
+}
+function employee(person, salary) {
+    var empl = Object.create(person); // ECMAScript 5
+    empl.salary = salary; // prototype was not changed
+    return empl;
+}
+// fred --> person --> Object.prototype --> null
+var fred = employee(person('Fred', 'Bell'), 1000);
+var name = fred.name;
+var salary = fred.salary;
+</code></pre>
+        </section>
+        <section class="slide" id="js-obj-methods">
+            <header>Object methods</header>
+            <ul>
+                <li>Objects may (and mostly) inherit from Object.prototype</li>
+                <li>Objects may (and mostly) inherit some basic methods</li>
+            </ul>
+<pre><code class="javascript">
+/* Is the member, specified by name argument, is a member of this object? */
+hasOwnProperty(name);
+</code></pre>
+            <ul>
+                <li><i class="icon-warning-sign"></i> No <strong>copy</strong> method</li>
+                <li><i class="icon-warning-sign"></i> No <strong>equals</strong> method</li>
+                <li><i class="icon-warning-sign"></i> <strong>==</strong> or <strong>===</strong> compares only references of objects</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-constructors">
+            <header>Constructor functions</header>
+            <ul>
+                <li>aka <em>constructors</em></li>
+                <li>Constructor functions are functions called with the <strong>new</strong> operator</li>
+                <li>By convention name starts with upper case</li>
+            </ul>
+<pre><code class="javascript">
+function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+}
+var fred = new Person('Fred', 'Bell');
+var name = fred.name;
+var surname = fred.surname;
+</code></pre>
+        </section>
+        <section class="slide" id="js-obj-create">
+            <header>Object.create</header>
+            <ul>
+                <li>ECMAScript 5</li>
+                <li>Browser support: Firefox 4 (Gecko 2), Chrome 5, IE 9, Opera 11.50, Safari 5</li>
+            </ul>
+<pre><code class="javascript">
+Object.create(proto [, propertiesObject ]);
+</code></pre>
+<pre><code class="javascript">
+var empty = Object.create(null); // pure empty object, no prototype
+typeof empty.toString === "undefined";
+
+var fred = Object.create(Object.prototype);
+fred.name = 'Fred';
+fred.surname = 'Bell';
+typeof fred.toString === "function";
+
+var mike = Object.create(Object.prototype, {
+    name : 'Mike',
+    surname : 'Palmer'
+});
+</code></pre>
+        </section>
+        <section class="slide" id="js-obj-ref">
+            <header>Reference</header>
+            <ul>
+                <li>Objects can be passed as arguments to functions, and can be returned by functions</li>
+                <li><i class="icon-warning-sign"></i> Objects are passed by reference</li>
+                <li><i class="icon-warning-sign"></i> Objects are not passed by value</li>
+                <li><i class="icon-warning-sign"></i> The operators <strong>==</strong>, <strong>===</strong> compare objects by reference</li>
+            </ul>
+        </section>
+        <section class="slide" id="js-delete">
+            <header>Delete</header>
+            <ul>
+                <li>Used to delete members from objects</li>
+            </ul>
+<pre><code class="javascript">
+delete object[member];
+delete object.member;
+</code></pre>
+<pre><code class="javascript">
+var fred = { name : 'Fred', surname : 'Bell' };
+
+delete fred.name;
+delete fred['surname'];
+typeof fred.name === 'undefined';
+typeof fred.surname === 'undefined';
+</code></pre>
+        </section>
+        <section class="slide" id="js-arrays">
+            <header>Arrays</header>
+            <ul>
+                <li>Arrays inherit from objects</li>
+                <li>Arrays are dynamic</li>
+            </ul>
+<pre><code class="javascript">
+var nums = [1, 2, 3]; // array literal
+nums = new Array(1, 2, 3);
+nums.length === 3; // It's not the number of elements in array!!! WAT?!
+nums[0] === 1;
+nums[99] === undefined;
+nums[99] = 'name';
+nums.length === 100;
+
+// But! Concider this...
+delete nums[99];
+nums.length === 100;
+// Still there are only 3 values in array!!! WAT?!
+nums.splice(99, 1);
+nums.length === 99; // WAT?!
+
+// One more thing
+delete nums[1]; // [1, undefined, 3]
+nums.splice(1, 1); // [1, 3]
+</code></pre>
+            <ul>
+                <li>There are methods: concat, join, push, pop, shift, unshift, slice, sort, splice</li>
+                <li>Arrays inherit from <strong>Array.prototype</strong></li>
+            </ul>
+        </section>
+        <section class="slide" id="js-get-type">
+            <header>Determining the type </header>
+            <ul>
+                <li><strong>value.constructor</strong></li>
+            </ul>
+<pre><code class="javascript">
+var nums = [1, 2, 3];
+nums.constructor === Array; // true
+function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+}
+var fred = new Person('Fred', 'Bell');
+fred.constructor === Person; // true
+fred.constructor === Object; // false
+</code></pre>
+            <ul>
+                <li><strong>instanceof</strong></li>
+            </ul>
+<pre><code class="javascript">
+var nums = [1, 2, 3];
+nums instanceof Array; // true
+function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+}
+var fred = new Person('Fred', 'Bell');
+fred instanceof Person; // true
+fred instanceof Object; // true
+</code></pre>
+            <ul>
+                <li><strong>typeof</strong> <i class="icon-frown"></i></li>
+            </ul>
+<pre><code class="javascript">
+typeof 1 === 'number';
+typeof 'abc' === 'string';
+typeof function () {} === 'function';
+typeof {} === 'object';
+typeof [] === 'object'; // WAT?!
+// and many more :(
+typeof null === 'object';
+typeof undefined === 'undefined';
+</code></pre>
+        </section>
+        <section class="slide" id="js-using-funcs">
+            <header>Using functions</header>
+            <ul>
+                <li>Functions inherit from <strong>Function.prototype</strong></li>
+                <li><i class="icon-star"></i> Functions can be used as arguments to other functions</li>
+                <li><i class="icon-star"></i> Functions can be returned from other functions</li>
+                <li>Functions also inherit from <strong>Object.prototype</strong></li>
+                <li>Functions can store members</li>
+                <li>Functions can be variadic using <strong>arguments</strong></li>
+            </ul>
+<pre><code class="javascript">
+function sum() {
+    var sum = 0;
+    for (var i = 0; i &lt; arguments.length; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+}
+var result = sum(1, 2, 3); // result === 6
+
+// But!!!
+function wat() {
+    arguments.constructor; // undefined!!! WAT?!
+    arguments instanceof Array; // false!!! WAT?!
+}
+</code></pre>
+            <ul>
+                <li><strong>arguments.callee</strong></li>
+            </ul>
+        </section>
+        <section class="slide" id="js-funcs-decl">
+            <header><i class="icon-warning-sign"></i> More WATS?! on the way!</header>
+<pre><code class="javascript">
+// Example #1
+function update(sum) {
+    typeof sum; // 'function'
+    // Some code in here
+    function sum() {}
+    // Some code in here
+}
+
+// Example #2
+typeof sum; // 'function'
+var sum = 0;
+function sum() {}
+
+// Example #3
+typeof sum; // 'undefined'
+var sum = 0;
+var sum = function () {};
+
+// Example #4
+typeof sum; // 'undefined'
+var sum = function () {};
+var sum = 0;
+</code></pre>
+            <i class="icon-warning-sign"></i> Don't try this at home!!!
+        </section>
+        <section class="slide" id="js-inner-funcs">
+            <header>Inner functions and closures</header>
+            <ul>
+                <li>Functions can be defined inside of other functions</li>
+                <li>
+                    An inner function has access to the variables and parameters of functions that it is contained within.
+                    This is known as Static Scoping or Lexical Scoping.
+                </li>
+                <li>
+                    The scope that inner function enjoys continues even after the parent functions have returned
+                    (this is called <strong>closure</strong>)
+                </li>
+            </ul>
+<pre><code class="javascript">
+function simple_curry(func, arg) {
+    return function () {
+        return func(arg, arguments[0] || 0);
+    };
+}
+function add(a, b) { return a + b; }
+var add5 = simple_curry(add, 5);
+add5(); // 5
+add5(3); // 8
+</code></pre>
+        </section>
+        <section class="slide" id="js-func-objs">
+            <header>Function objects</header>
+            <ul>
+                <li>Functions are objects, so the can contain members</li>
+                <li>This can serve the same purpose as <strong>static</strong> members in other languages</li>
+            </ul>
+<pre><code class="javascript">
+function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+}
+Person.create = function (name, surname) {
+    return new Person(name, surname);
+};
+var fred = Person.create('Fred', 'Bell');
+var mike = Person.create('Mike');
+typeof mike.surname === 'undefined';
+</code></pre>
+        </section>
+        <section class="slide" id="js-funcs-more">
+            <header>More on functions</header>
+            <ul>
+                <li><strong>thisObject.method()</strong></li>
+            </ul>
+<pre><code class="javascript">
+function say(message) {
+    return this.name + ' said: ' + message;
+}
+var fred = { name : 'Fred' };
+fred.say = say;
+fred.say('Hello'); // Fred said: Hello
+
+// Wait! What if?
+say('Hello'); // " said: Hello"
+</code></pre>
+            <ul>
+                <li><strong>bind</strong> method</li>
+            </ul>
+<pre><code class="javascript">
+function say(message) {
+    return (this.name || 'Anonymous') + ' said: ' + message;
+}
+say('Hello'); // Anonymous said: Hello
+var fredSays = say.bind({ name : 'Fred'});
+fredSays('Hello'); // Fred said: Hello
+</code></pre>
+            <ul>
+                <li><strong>call</strong> and <strong>apply</strong> methods</li>
+            </ul>
+<pre><code class="javascript">
+function say(message) {
+    return (this.name || 'Anonymous') + ' said: ' + message;
+}
+say.call({ name : 'Fred'}, 'Hello'); // Fred said: Hello
+say.apply({ name : 'Fred'}, ['Hello']); // Fred said: Hello
+
+// func.call(thisBind, args...)
+// func.apply(thisBind, argsArray)
+</code></pre>
+        </section>
+        <section class="slide" id="js-type-augment">
+            <header>Augmenting Built-in Types</header>
+            <ul>
+                <li>Object.prototype</li>
+                <li>Array.prototype</li>
+                <li>Function.prototype</li>
+                <li>Number.prototype</li>
+                <li>String.prototype</li>
+                <li>Boolean.prototype</li>
+            </ul>
+<pre><code class="javascript">
+// ECMAScript 5
+// IE 8 or less doesn't have trim
+if (!String.prototype.trim) {
+    String.prototype.trim = function () {
+        return this.replace(/^\s+|\s+$/g, '');
+    };
+}
+' a '.trim(); // 'a'
+</code></pre>
+        </section>
+        <section class="slide" id="js-inherit">
+            <header>Inheritance</header>
+            <ul>
+                <li>Classical inheritance with Object.create</li>
+            </ul>
+<pre><code class="javascript">
+function Person(name, surname) {
+    this.name = name || 'Unknown';
+    this.surname = surname || 'Unknown';
+}
+Person.employee.changeSurname = function (surname) {
+    this.surname = surname || 'Unknown';
+};
+function Employee(name, surname, salary) {
+    Person.call(this, name, surname); // call super constructor
+    this.salary = salary || 0;
+}
+// subclass extends superclass
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.updateSalary = function (val) {
+    this.salary = this.salary + val;
+};
+var fred = new Employee('Fred', 'Bell', 1000);
+</code></pre>
+        </section>
         <section class="slide" id="js-more">
+            <header>More...</header>
             <ul>
                 <li>
                     Douglas Crockford: The JavaScript Programming Language<br>
