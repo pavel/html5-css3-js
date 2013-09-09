@@ -321,6 +321,7 @@ with (o) {
                 <li>
                     Initial values are optional
                 </li>
+            </ul>
 <pre><code class="javascript">
 /* Example #1 */
 var name;
@@ -339,7 +340,6 @@ var a, x;
 a = x;
 x = 3;
 </code></pre>
-            </ul>
         </section>
         <section class="slide" id="js-funcs">
             <header>Functions</header>
@@ -366,19 +366,19 @@ sum(1, 2, 3);
                 <li>Variables defined in a function are not visible outside of the function.</li>
             </ul>
 <pre><code class="javascript">
-    var a = 2;
-    if (condition) {
-        var a = 3;
-    }
-    // a == 3
+var a = 2;
+if (condition) {
+    var a = 3;
+}
+// a == 3
 </code></pre>
 <pre><code class="javascript">
-    var a = 2;
-    function func() {
-        var a = 3;
-    }
-    func();
-    // a == 2
+var a = 2;
+function func() {
+    var a = 3;
+}
+func();
+// a == 2
 </code></pre>
         </section>
         <section class="slide" id="js-return">
@@ -392,8 +392,8 @@ sum(1, 2, 3);
                 <li>Except for constructor functions, whose default value is <strong>this</strong></li>
             </ul>
 <pre><code class="javascript">
-    function noop() {}
-    noop(); // undefined
+function noop() {}
+noop(); // undefined
 </code></pre>
         </section>
         <section class="slide" id="js-obj-literals">
@@ -511,11 +511,6 @@ var fred = Object.create(Object.prototype);
 fred.name = 'Fred';
 fred.surname = 'Bell';
 typeof fred.toString === "function";
-
-var mike = Object.create(Object.prototype, {
-    name : { value : 'Mike' },
-    surname : { value : 'Palmer' }
-});
 </code></pre>
         </section>
         <section class="slide" id="js-obj-ref">
