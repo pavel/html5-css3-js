@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ECMAScript 5</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/github.css">
+        <link rel="stylesheet" type="text/css" href="styles/index.css">
+    </head>
+    <body>
+        <section class="slide" id="home"><ol></ol></section>
+        <section class="slide" id="overview">
+            <header>ES5: A better JavaScript</header>
+            <ul>
+                <li>Douglas Crockford <a href="http://crockford.com/">http://crockford.com/</a></li>
+                <li>Crockford on JavaScript - Level 7: ECMAScript 5: The New Parts</li>
+                <li>
+                    <a href="http://www.youtube.com/watch?v=UTEqr0IlFKY">http://www.youtube.com/watch?v=UTEqr0IlFKY</a>
+                    <i class="icon-youtube icon-large"></i>
+                </li>
+            </ul>
+        </section>
+        <section class="slide" id="new-syntax">
+            <header>New syntax</header>
+            <ul>
+                <li>Causes error on IE &lt; 9</li>
+            </ul>
+        </section>
+        <section class="slide" id="trailing-commas">
+            <header>Trailing commas</header>
+<pre><code class="javascript">
+{
+    "trailing": "comma",
+}
+
+// Always legal in arrays, but there're things to consider.
+[
+    "trailing",
+    "comma",
+]
+</code></pre>
+        </section>
+        <section class="slide" id="reserved-word-relax">
+            <header>Reserved word relaxation</header>
+            <ul>
+                <li>No reserved word restrictions on property names</li>
+            </ul>
+<pre><code class="javascript">
+var a = {
+    return: true,
+    function: liberty,
+    class: 'a'
+};
+a.return = false;
+a.function();
+a.class;
+</code></pre>
+        </section>
+        <section class="slide" id="getters-setters">
+            <header>Getters and Setters</header>
+<pre><code class="javascript">
+function make_person(name) {
+    return {
+        get name() {
+            return name;
+        },
+        set name(value) {
+            name = value;
+        }
+    };
+}
+var person = make_person('Fred');
+var name = person.name;
+person.name = 'Mike';
+</code></pre>
+            <i class="icon-frown"></i> Keep it old-school! No side-effects!
+        </section>
+        <section class="slide" id="multiline-strings">
+            <header>Multiline string literals</header>
+<pre><code class="javascript">
+var long_line_1 = "This is a \
+long line"; // ok
+var long_line_2 = "This is a \ 
+long line"; // Syntax error
+</code></pre>
+<i class="icon-frown"></i> Forget this thing!
+        </section>
+        <section class="slide" id="constants">
+            <header>Constants</header>
+            <ul>
+                <li>Infinity</li>
+                <li>NaN</li>
+                <li>undefined</li>
+            </ul>
+            <i class="icon-warning-sign"></i> Before ES5 they were variables
+        </section>
+        <section class="slide" id="parseint">
+            <header>parseInt</header>
+<pre><code class="javascript">
+parseInt('08') === 8 // before ES5 result was 0
+</code></pre>
+        </section>
+        <section class="slide" id="regexp">
+            <header>Regexp Literals</header>
+            <ul>
+                <li><strong>/regexp/</strong> now produces new regular expression objects every time</li>
+            </ul>
+        </section>
+        <section class="slide" id="new-methods">
+            <header>New methods</header>
+            <ul>
+                <li>Methods can be added without breaking syntax</li>
+            </ul>
+        </section>
+        <section class="slide" id="json">
+            <header>JSON</header>
+            <ul>
+                <li>JavaScript Object Notation</li>
+                <li>JSON is a light-weight, language independent, data interchange format</li>
+            </ul>
+<pre><code class="javascript">
+// text - the string to parse as JSON
+// reviver - if a function, prescribes how the value originally produced by parsing
+//           is transformed, before being returned.
+JSON.parse(text, reviver);
+
+// value - the value to convert to a JSON string.
+// replacer - If a function, transforms values and properties encountered
+//            while stringifying. If an array, specifies the set of properties
+//            included in objects in the final string.
+// space - causes the resulting string to be pretty-printed.
+JSON.stringify(value, replacer, space);
+</code></pre>
+        </section>
+        <section class="slide" id="trim">
+            <header>String.prototype.trim</header>
+            <ul>
+                <li>Removes whitespace from both ends of the string</li>
+            </ul>
+<pre><code class="javascript">
+string.trim()
+</code></pre>
+<pre><code class="javascript">
+if  (!String.prototype.trim) {
+    String.prototype.trim = function () {
+        return this.replace(/^\s+|\s+$/g, '');
+    };
+}
+</code></pre>
+        </section>
+        <section class="slide" id="array-every">
+            <header>Array.prototype.every</header>
+            <ul>
+                <li>Tests whether all elements in the array pass the test implemented by the provided function</li>
+            </ul>
+<pre><code class="javascript">
+array.every(callback[, thisObject])
+</code></pre>
+<pre><code class="javascript">
+function isBigEnough(element, index, array) {
+    return (element >= 10);
+}
+var passed = [12, 5, 8, 130, 44].every(isBigEnough); // passed is false
+passed = [12, 54, 18, 130, 44].every(isBigEnough); // passed is true
+</code></pre>
+        </section>
+        <section class="slide" id="array-filter">
+            <header>Array.prototype.filter</header>
+            <ul>
+                <li>Creates a new array with all elements that pass the test implemented by the provided function</li>
+            </ul>
+<pre><code class="javascript">
+array.filter(callback[, thisObject])
+</code></pre>
+<pre><code class="javascript">
+function isBigEnough(element) {
+    return element >= 10;
+}
+var filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // filtered is [12, 130, 44]
+</code></pre>
+        </section>
+        <section class="slide" id="array-foreach">
+            <header>Array.prototype.forEach</header>
+            <ul>
+                <li>Executes a provided function once per array element</li>
+            </ul>
+<pre><code class="javascript">
+array.forEach(callback[, thisArg])
+</code></pre>
+<pre><code class="javascript">
+function logArrayElements(element, index, array) {
+    console.log("a[" + index + "] = " + element);
+}
+[2, 5, 9].forEach(logArrayElements);
+</code></pre>
+        </section>
+        <section class="slide" id="array-indexof">
+            <header>Array.prototype.indexOf</header>
+            <ul>
+                <li>Returns the first index at which a given element can be found in the array, or -1 if it is not present</li>
+            </ul>
+<pre><code class="javascript">
+array.indexOf(searchElement[, fromIndex])
+</code></pre>
+<pre><code class="javascript">
+var array = [2, 5, 9];
+var index = array.indexOf(2); // index is assigned 0
+index = array.indexOf(7); // index is assigned -1
+</code></pre>
+        </section>
+        <section class="slide" id="array-lastindexof">
+            <header>Array.prototype.lastIndexOf</header>
+            <ul>
+                <li>
+                    Returns the last index at which a given element can be found in the array, or -1 if it is not present;
+                    the array is searched backwards, starting at fromIndex
+                </li>
+            </ul>
+<pre><code class="javascript">
+array.lastIndexOf(searchElement[, fromIndex])
+</code></pre>
+<pre><code class="javascript">
+var array = [2, 5, 9, 2];
+var index = array.lastIndexOf(2); // index is 3
+index = array.lastIndexOf(7); // index is -1
+index = array.lastIndexOf(2, 3); // index is 3
+index = array.lastIndexOf(2, 2); // index is 0
+index = array.lastIndexOf(2, -2); // index is 0
+index = array.lastIndexOf(2, -1); // index is 3
+</code></pre>
+        </section>
+        <section class="slide" id="array-map">
+            <header>Array.prototype.map</header>
+            <ul>
+                <li>Creates a new array with the results of calling a provided function on every element in this array</li>
+            </ul>
+<pre><code class="javascript">
+array.map(callback[, thisArg]);
+</code></pre>
+<pre><code class="javascript">
+var numbers = [1, 4, 9];
+var roots = numbers.map(Math.sqrt);
+/* roots is now [1, 2, 3], numbers is still [1, 4, 9] */
+</code></pre>
+        </section>
+        <section class="slide" id="array-reduce">
+            <header>Array.prototype.reduce</header>
+            <ul>
+                <li>Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value</li>
+            </ul>
+<pre><code class="javascript">
+array.reduce(callback[, initialValue])
+</code></pre>
+<pre><code class="javascript">
+var total = [0, 1, 2, 3].reduce(function(a, b) {
+    return a + b;
+}); // total == 6
+</code></pre>
+        </section>
+        <section class="slide" id="array-reduce-right">
+            <header>Array.prototype.reduceRight</header>
+            <ul>
+                <li>Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value</li>
+            </ul>
+<pre><code class="javascript">
+array.reduceRight(callback[, initialValue])
+</code></pre>
+<pre><code class="javascript">
+var flattened = [[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {
+    return a.concat(b);
+}, []); // flattened is [4, 5, 2, 3, 0, 1]
+</code></pre>
+        </section>
+        <section class="slide" id="array-some">
+            <header>Array.prototype.some</header>
+            <ul>
+                <li>Tests whether some element in the array passes the test implemented by the provided function</li>
+            </ul>
+<pre><code class="javascript">
+array.some(callback[, thisObject])
+</code></pre>
+<pre><code class="javascript">
+function isBigEnough(element, index, array) {
+    return (element >= 10);
+}
+var passed = [2, 5, 8, 1, 4].some(isBigEnough); // passed is false
+passed = [12, 5, 8, 1, 4].some(isBigEnough); // passed is true
+</code></pre>
+        </section>
+        <section class="slide" id="date-now">
+            <header>Date.now()</header>
+<pre><code class="javascript">
+if (!Date.now) {
+    Date.now = function now() {
+        return new Date().getTime();
+    };
+}
+</code></pre>
+        </section>
+        <section class="slide" id="obj-keys">
+            <header>Object.keys</header>
+            <ul>
+                <li>
+                    Returns an array of a given object's own enumerable properties, in the same order as that provided by a for-in loop
+                    (the difference being that a for-in loop enumerates properties in the prototype chain as well)
+                </li>
+            </ul>
+<pre><code class="javascript">
+Object.keys(obj)
+</code></pre>
+<pre><code class="javascript">
+var arr = ["a", "b", "c"];
+var keys = Object.keys(arr); // ["0", "1", "2"]
+var obj = { 0 : "a", 1 : "b", 2 : "c"};
+keys = Object.keys(obj); // ["0", "1", "2"]
+var fred = { name : 'Fred' };
+keys = Object.keys(fred); // ["name"]
+</code></pre>
+        </section>
+        <section class="slide" id="obj-create">
+            <header>Object.create</header>
+            <ul>
+                <li>Creates a new object with the specified prototype object and properties</li>
+            </ul>
+<pre><code class="javascript">
+Object.create(proto [, propertiesObject ])
+</code></pre>
+<pre><code class="javascript">
+function Person() {}
+Person.prototype.say = function (msg) {
+    return (this.name || 'Anonymous') + ' said: ' + msg;
+};
+var fred = Object.create(Person.prototype, {
+    name: { writable : true, configurable : true, value: "Fred" }
+});
+fred.say('hello'); // Fred said: hello
+</code></pre>
+        </section>
+        <section class="slide" id="array-isarray">
+            <header>Array.isArray</header>
+            <ul>
+                <li>Returns true if an object is an array, false if it is not</li>
+            </ul>
+<pre><code class="javascript">
+Array.isArray(obj)
+</code></pre>
+<pre><code class="javascript">
+// all following calls return true
+Array.isArray([]);
+Array.isArray([1]);
+Array.isArray( new Array() );
+// Little known fact: Array.prototype itself is an array.
+Array.isArray( Array.prototype );
+
+// all following calls return false
+Array.isArray();
+Array.isArray({});
+Array.isArray(null);
+Array.isArray(undefined);
+Array.isArray(17);
+Array.isArray("Array");
+Array.isArray(true);
+Array.isArray(false);
+Array.isArray({ __proto__ : Array.prototype });
+</code></pre>
+        </section>
+        <section class="slide" id="meta-object-api">
+            <header>Meta Object API</header>
+            <ul>
+                <li>Control over the attributes of the properties of the objects</li>
+            </ul>
+        </section>
+        <section class="slide" id="meta-property-types">
+            <header>Two kinds of properties</header>
+            <ul>
+                <li>Data properties</li>
+                <li>Accessor properties</li>
+            </ul>
+        </section>
+        <section class="slide" id="attrs">
+            <header>Attributes</header>
+            <p><i class="icon-warning-sign"></i> A property is a named collection of attributes</p>
+            <p>Data properties:</p>
+            <ul>
+                <li>value: any JavaScript value</li>
+                <li>writeable: boolean</li>
+                <li>enumerable: boolean</li>
+                <li>configurable: boolean</li>
+            </ul>
+            <p>Accessor properties:</p>
+            <ul>
+                <li>get: function () { return value; }</li>
+                <li>set: function (value) {}</li>
+            </ul>
+            <p><i class="icon-warning-sign"></i> once attribute is set to <strong>false</strong> it can't be set back to true</p>
+<pre><code class="javascript">
+var fred = Object.create(Object.prototype, {
+    name : { value : 'Fred', enumerable : true }
+});
+Object.defineProperty(fred, 'surname', {
+    value : 'Bell',
+    writeable : true,
+    enumerable : true,
+    configurable : true
+});
+var surname = fred.surname; // Bell
+Object.defineProperty(fred, 'fullName', {
+    get : function () { return this.name + ' ' + this.surname; },
+    enumerable : true
+});
+var fullName = fred.fullName; // Fred Bell
+fred.fullName = 'Mike Palmer'; // Nothing is changed, no error
+</code></pre>
+        </section>
+        <section class="slide" id="meta-object-api-methods">
+            <header>Meta Object API methods</header>
+<pre><code class="javascript">
+Object.defineProperty(object, key, descriptor);
+Object.defineProperties(object, object_of_descriptors);
+Object.getOwnPropertyDescriptor(object, key);
+</code></pre>
+        </section>
+        <section class="slide" id="obj-ext">
+            <header>Object extensibility</header>
+<pre><code class="javascript">
+// Prevents new properties from ever being added to an object
+Object.preventExtensions(object);
+// configurable is set to false, on all properties
+Object.seal(object);
+// configurable is set to false, and writable is set to false, on all properties
+Object.freeze(object);
+
+Object.isExtensible(object);
+Object.isSealed(object);
+Object.isFrozen(object);
+</code></pre>
+        </section>
+        <section class="slide" id="strict-mode-usage">
+            <header>Strict mode usage</header>
+            <ul>
+                <li>The most important new feature in ECMAScript 5 <i class="icon-fire"></i></li>
+                <li>Backward compatible pragma</li>
+            </ul>
+<pre><code class="javascript">
+'use strict';
+</code></pre>
+            <ul>
+                <li>File form. First statement in a file <i class="icon-frown"></i></li>
+                <li>Function form. First statement in a function <i class="icon-smile"></i></li>
+            </ul>
+        </section>
+        <section class="slide" id="strict-mode-descr">
+            <header>Strict mode description</header>
+            <ul>
+                <li>No more implied global variables withing functions</li>
+                <li>this is not bound to the global object by function form</li>
+                <li><strong>apply</strong> and <strong>call</strong> do not default to global object</li>
+                <li>No <strong>with</strong> statement</li>
+                <li>Setting a <em>writable : false</em> property will throw</li>
+                <li>Deleting a <em>configurable : false</em> property will throw</li>
+                <li>Restrictions on eval</li>
+                <li><strong>eval</strong> and <strong>arguments</strong> are reserved</li>
+                <li><strong>arguments</strong> not linked to parameters</li>
+                <li>No more <strong>arguments.caller</strong> or <strong>arguments.callee</strong></li>
+                <li>No more octal literals</li>
+                <li>Duplicate names in the object literal or function parameters are a syntax error</li>
+            </ul>
+        </section>
+        <section class="slide" id="bye">
+            <header>Bye</header>
+            <p style="text-align: center">
+                <img src="http://danshultz.github.io/talks/javascript_so_easy/images/javascript_not_funny.jpg">
+            </p>
+        </section>
+        <footer>
+            <a href="javascript:void(0)" id="prev"><i class="icon-chevron-left"></i></a>
+            <a href="#go/home"><i class="icon-home icon-2x"></i></a>
+            <a href="javascript:void(0)" id="next"><i class="icon-chevron-right"></i></a><br>
+            <i class="icon-time"></i> <span id="time"></span>
+        </footer>
+        <script src="scripts/jquery-2.0.3.min.js"></script>
+        <script src="scripts/routie.min.js"></script>
+        <script src="scripts/mousetrap.min.js"></script>
+        <script src="scripts/nav.js"></script>
+        <script src="scripts/time.js"></script>
+        <script src="scripts/highlight.pack.js"></script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script src="scripts/toc.js"></script>
+    </body>
+</html>
