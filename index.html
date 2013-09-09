@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>HTML5, CSS3, JavaScript</title>
+        <title>JavaScript</title>
         <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles/github.css">
         <link rel="stylesheet" type="text/css" href="styles/index.css">
@@ -47,9 +47,9 @@
                 <li><a href="#go/js-func-objs">JavaScript: Function objects</a></li>
                 <li><a href="#go/js-funcs-more">JavaScript: More on functions</a></li>
                 <li><a href="#go/js-type-augment">JavaScript: Augmenting Built-in Types</a></li>
-                <li><a href="#go/js-inherit">JavaScript: Inheritance</a></li>
+                <li><a href="#go/js-inherit-classic">JavaScript: Inheritance (classic)</a></li>
+                <li><a href="#go/js-inherit-mixin">JavaScript: Mixins</a></li>
                 <li><a href="#go/js-more">JavaScript: More</a></li>
-                <li><a href="#go/outro">Goodbye</a></li>
             </ol>
         </section>
         <section class="slide" id="js">
@@ -774,17 +774,17 @@ if (!String.prototype.trim) {
 ' a '.trim(); // 'a'
 </code></pre>
         </section>
-        <section class="slide" id="js-inherit">
+        <section class="slide" id="js-inherit-classic">
             <header>Inheritance</header>
             <ul>
-                <li>Classical inheritance with Object.create</li>
+                <li>Classical inheritance with Object.create (ECMAScript 5)</li>
             </ul>
 <pre><code class="javascript">
 function Person(name, surname) {
     this.name = name || 'Unknown';
     this.surname = surname || 'Unknown';
 }
-Person.employee.changeSurname = function (surname) {
+Person.prototype.changeSurname = function (surname) {
     this.surname = surname || 'Unknown';
 };
 function Employee(name, surname, salary) {
@@ -799,6 +799,48 @@ Employee.prototype.updateSalary = function (val) {
 var fred = new Employee('Fred', 'Bell', 1000);
 </code></pre>
         </section>
+        <section class="slide" id="js-inherit-mixin">
+            <header>Inheritance</header>
+            <ul>
+                <li>Mixins</li>
+            </ul>
+<pre><code class="javascript">
+function MyClass() {
+    SuperClass.call(this);
+    OtherSuperClass.call(this);
+}
+
+MyClass.prototype = Object.create(SuperClass.prototype); //inherit
+mixin(MyClass.prototype, OtherSuperClass.prototype); //mixin
+
+MyClass.prototype.myMethod = function() {
+    // do a thing
+};
+</code></pre>
+<pre><code class="javascript">
+function copy(target, src) {
+    for (var prop in src) {
+        if (src.hasOwnProperty(prop)) target[prop] = src[prop];
+    }
+    return target;
+}
+function mixin(ext) {
+    return copy(copy({}, this), ext);
+}
+function Friend() {}
+Friend.prototype.listen = function () {
+    return this.name + " is listening";
+};
+function Person(name) {
+    this.name = name || 'Unknown';
+}
+var fred = new Person('Fred');
+var mike = new Person('Mike');
+fred.as = mixin;
+var friendFred = fred.as(Friend.prototype);
+friendFred.listen(); // Fred is listening
+</code></pre>
+        </section>
         <section class="slide" id="js-more">
             <header>More...</header>
             <ul>
@@ -808,10 +850,6 @@ var fred = new Employee('Fred', 'Bell', 1000);
                     <i class="icon-youtube-sign icon-large"></i>
                 </li>
             </ul>
-        </section>
-        <section class="slide" id="outro">
-            <header>Outro</header>
-            <p>Bye, bye!</p>
         </section>
         <footer>
             <a href="javascript:void(0)" id="prev"><i class="icon-chevron-left"></i></a>
