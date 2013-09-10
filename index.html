@@ -229,6 +229,10 @@ implements, interface, let, package, private, protected, public, static, yield
 </code></pre>
 <pre><code class="javascript">
 // Type coercion :( What's wrong with this thing?!
+'' == '0' // false
+0 == ''   // true
+0 == '0'  // true
+
 false == null      // false
 false == undefined // false
 null == undefined  // true
@@ -289,7 +293,7 @@ return a && a.number;
             </ul>
 <pre><code class="javascript">
 function greet(name) {
-    return 'Hello ' + (name || 'anonymous') + '!';
+    return 'Hello, ' + (name || 'anonymous') + '!';
 }
 </code></pre>
         </section>
@@ -607,10 +611,11 @@ fred instanceof Object; // true
 <pre><code class="javascript">
 typeof 1 === 'number';
 typeof 'abc' === 'string';
+typeof true === 'boolean';
 typeof function () {} === 'function';
 typeof {} === 'object';
 typeof [] === 'object'; // WAT?!
-// and many more :(
+// and more :(
 typeof null === 'object';
 typeof undefined === 'undefined';
 </code></pre>
@@ -665,11 +670,6 @@ function sum() {}
 typeof sum; // 'undefined'
 var sum = 0;
 var sum = function () {};
-
-// Example #4
-typeof sum; // 'undefined'
-var sum = function () {};
-var sum = 0;
 </code></pre>
             <i class="icon-warning-sign"></i> Don't try this at home!!!
         </section>
@@ -714,7 +714,6 @@ Person.create = function (name, surname) {
 };
 var fred = Person.create('Fred', 'Bell');
 var mike = Person.create('Mike');
-typeof mike.surname === 'undefined';
 </code></pre>
         </section>
         <section class="slide" id="js-funcs-more">
@@ -731,7 +730,7 @@ fred.say = say;
 fred.say('Hello'); // Fred said: Hello
 
 // Wait! What if?
-say('Hello'); // " said: Hello"
+say('Hello'); // " said: Hello" (not everywhere you gonna see this output)
 </code></pre>
             <ul>
                 <li><strong>bind</strong> method (ECMAScript 5)</li>
