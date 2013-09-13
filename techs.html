@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript Techniques</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/base.css">
+    </head>
+    <body>
+    <textarea id="source">
+class: center, middle
+# JavaScript Techniques
+---
+class: center, middle
+# Callbacks
+---
+# Callbacks
+In computer programming, a callback is a piece of executable code that is passed as an argument to other code, which is expected to call back (execute) the argument at some convenient time. The invocation may be immediate as in a synchronous callback or it might happen at later time, as in an asynchronous callback.
+```javascript
+var nums = [1, 2, 3];
+function add(a, b) {
+    return a + b;
+}
+var total = nums.reduce(add);
+```
+```javascript
+function get(resource, success, error) {
+    // loads resouce from server
+}
+```
+```javascript
+get('people.json', function (data) {
+    // do some stuff with data
+}, function (error) {
+    // show something to the user
+});
+```
+---
+
+# Callback hell
+```javascript
+function error(error) {
+    // displays error
+}
+get('people.json', function (people) {
+    get('addresses.json', function (addresses) {
+        get('zipcodes.json', function (codes) {
+            // do some stuff
+        }, error);
+    }, error);
+}, error);
+```
+![No](http://farm4.staticflickr.com/3101/2851814771_38b1ff5e57.jpg)
+---
+
+class: center, middle
+# Promise
+---
+
+# Promise
+```javascript
+var people = get('people.json');
+var addresses = get('addresses.json');
+var codes = get('zipcodes.json');
+// do something with all that data
+```
+```javascript
+all([people, addresses, codes]).then(function (data) {
+    // doing stuff with data
+}).otherwise(function (error) {
+    // displaying error
+});
+```
+```javascript
+try {
+    var people = get('people.json');
+    var addresses = get('addresses.json');
+    var codes = get('zipcodes.json');
+    // do stuff with data
+} catch (error) {
+    // display error
+}
+```
+---
+
+class: center, middle
+# Modules
+---
+
+# Module pattern
+Anonymous closures
+```javascript
+(function () {
+    // some code here
+}());
+```
+Importing dependencies through global variables
+```javascript
+(function ($, mymod) {
+    // some code here
+}(jQuery, MyModule));
+```
+---
+
+# Module pattern
+Exporting module
+```javascript
+// scripts/math/math.js
+var MyMathModule = (function () {
+    return {
+        add : function (a, b) {
+            return a + b;
+        }
+    };
+}());
+```
+Extending module
+```javascript
+// scripts/math/sum.js
+MyMathModule.sum = (function (add) {
+    function sum(array) {
+        return array.reduce(add);
+    }
+}(MyMathModule.add));
+```
+or
+```javascript
+// scripts/math/sub.js
+(function (math) {
+    math.sub = function (a, b) {
+        return a - b;
+    };
+}(MyMathModule));
+```
+---
+
+# Module augmentation
+Loose augmentation
+```javascript
+// scripts/math/div.js
+var MyMathModule = (function (math) {
+    math.div = function (a, b) {
+        return a / b;
+    };
+    return math;
+}(MyMathModule || {}));
+```
+Tight augmentation
+```javascript
+// scripts/math/new_add.js
+var MyMathModule = (function (math) {
+    var add = math.add;
+    math.add = function () {
+        Array.prototype.reduce.call(arguments, add);
+    };
+
+}(MyMathModule));
+```
+---
+
+# Submodules
+```javascript
+MyMathModule.constants = (function () {
+    return {
+        pi : 3.14
+    };
+}());
+```
+---
+
+class: center, middle
+# Mixins
+http://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/
+---
+
+# Mixins
+```javascript
+var Circle = function () {};
+Circle.prototype = {
+    area: function () {
+        return Math.PI * this.radius * this.radius;
+    },
+    grow: function () {
+        this.radius++;
+    },
+    shrink: function () {
+        this.radius--;
+    }
+};
+```
+```javascript
+function extend(dest, src) {
+    for (var key in src) {
+        if (src.hasOwnProperty(key)) dest[key] = src[key];
+    }
+    return dest;
+}
+```
+```javascript
+var RoundButton = function(radius, label) {
+  this.radius = radius;
+  this.label = label;
+};
+ 
+extend(RoundButton.prototype, Circle.prototype);
+```
+---
+
+# Functional mixins
+```javascript
+var asCircle = function () {
+    this.area = function () {
+        return Math.PI * this.radius * this.radius;
+    };
+    this.grow = function () {
+        this.radius++;
+    };
+    this.shrink = function () {
+        this.radius--;
+    };
+    return this;
+};
+```
+```javascript
+var RoundButton = function(radius, label) {
+  this.radius = radius;
+  this.label = label;
+};
+asCircle.call(RoundButton.prototype);
+```
+---
+
+# Functional mixins (caching)
+```javascript
+var asCircle = function () {
+    function area() {
+        return Math.PI * this.radius * this.radius;
+    };
+    function grow() {
+        this.radius++;
+    };
+    function shrink() {
+        this.radius--;
+    };
+    return function () {
+        this.area = area;
+        this.grow = grow;
+        this.shrink = shrink;
+    };
+};
+```
+```javascript
+var RoundButton = function(radius, label) {
+  this.radius = radius;
+  this.label = label;
+};
+asCircle.call(RoundButton.prototype);
+```
+---
+
+# Tools
+* http://jsperf.com/
+* http://jsfiddle.net/ or http://jsbin.com/
+* http://www.jslint.com/ or http://javascriptlint.com/ or http://jshint.com/
+* http://www.explainjs.com/
+
+<i class="icon-info-sign"></i> Use your browser tools
+    </textarea>
+    <footer>
+        <i class="icon-time"></i> <span id="time"></span>
+    </footer>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.5.4.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var slideshow = remark.create({
+            highlightLanguage : 'javascript',
+            highlightStyle : 'vs'
+        });
+    </script>
+    <script src="scripts/time.js"></script>
+    </body>
+</html>
