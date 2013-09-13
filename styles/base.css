@@ -1,0 +1,17 @@
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
+* {
+    font-family: 'Inconsolata', sans-serif;
+}
+a {
+    color: #f08;
+    text-decoration: none;
+}
+pre code {
+    border-left: 2px solid #888;
+}
+footer {
+    position: fixed;
+    right: 10px;
+    bottom: 0;
+    color: #888;
+}

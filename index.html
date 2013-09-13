@@ -4,230 +4,159 @@
         <meta charset="utf-8">
         <title>JavaScript</title>
         <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="styles/github.css">
-        <link rel="stylesheet" type="text/css" href="styles/index.css">
+        <link rel="stylesheet" type="text/css" href="styles/base.css">
     </head>
     <body>
-        <section class="slide" id="home">
-            <ol>
-                <li><a href="#go/js">Overview</a></li>
-                <li><a href="#go/js-ideas">Key Ideas</a></li>
-                <li><a href="#go/js-values">Values</a></li>
-                <li><a href="#go/js-numbers">Numbers</a></li>
-                <li><a href="#go/js-nan">NaN</a></li>
-                <li><a href="#go/js-work-num">Working with numbers</a></li>
-                <li><a href="#go/js-strings">Strings</a></li>
-                <li><a href="#go/js-null-undefined">null, undefined</a></li>
-                <li><a href="#go/js-bools">Booleans</a></li>
-                <li><a href="#go/js-falsy-truthy">Falsy and truthy values</a></li>
-                <li><a href="#go/js-objects">Objects</a></li>
-                <li><a href="#go/js-ids">IDs</a></li>
-                <li><a href="#go/js-reserved">Reserved words</a></li>
-                <li><a href="#go/js-eq">==, !=</a></li>
-                <li><a href="#go/js-plus-op">Plus operator</a></li>
-                <li><a href="#go/js-guard-op">Guard operator</a></li>
-                <li><a href="#go/js-default-op">Default operator</a></li>
-                <li><a href="#go/js-with">With statement</a></li>
-                <li><a href="#go/js-var">var statement</a></li>
-                <li><a href="#go/js-funcs">Functions</a></li>
-                <li><a href="#go/js-scope">Scope</a></li>
-                <li><a href="#go/js-return">Return</a></li>
-                <li><a href="#go/js-obj-literals">Object literals</a></li>
-                <li><a href="#go/js-linkage">Linkage and prototypal inheritance</a></li>
-                <li><a href="#go/js-obj-methods">Object methods</a></li>
-                <li><a href="#go/js-constructors">Constructor functions</a></li>
-                <li><a href="#go/js-obj-create">Object.create</a></li>
-                <li><a href="#go/js-obj-ref">Reference</a></li>
-                <li><a href="#go/js-delete">Delete</a></li>
-                <li><a href="#go/js-arrays">Arrays</a></li>
-                <li><a href="#go/js-get-type">Determining the type</a></li>
-                <li><a href="#go/js-using-funcs">Using functions</a></li>
-                <li><a href="#go/js-funcs-decl">Function declaration WATS?!</a></li>
-                <li><a href="#go/js-inner-funcs">Inner functions and closures</a></li>
-                <li><a href="#go/js-func-objs">Function objects</a></li>
-                <li><a href="#go/js-funcs-more">More on functions</a></li>
-                <li><a href="#go/js-type-augment">Augmenting Built-in Types</a></li>
-                <li><a href="#go/js-inherit-classic">Inheritance (classic)</a></li>
-                <li><a href="#go/js-inherit-mixin">Mixins</a></li>
-                <li><a href="#go/js-more">More</a></li>
-            </ol>
-        </section>
-        <section class="slide" id="js">
-            <header>JavaScript: overview</header>
-            <ul>
-                <li><a href="#go/js-java">JavaScript and Java</a></li>
-                <li><a href="#go/js-ecma">JavaScript and the ECMAScript specification</a></li>
-                <li><a href="#go/js-study">Studying JavaScript</a></li>
-            </ul>
-        </section>
-        <section class="slide" id="js-java">
-            <header><i class="icon-warning-sign"></i> JavaScript has nothing to do with Java! Seriously!</header>
-            <p style="text-align: center">
-                <img src="http://www.blogohblog.com/wp-content/pop/2008/07/funnyjavascript.gif">
-            </p>
-        </section>
-        <section class="slide" id="js-ecma">
-            <ul>
-                <li>ECMA</li>
-                <li>Standardized version of JavaScript, called ECMAScript</li>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/JavaScript_Overview">
-                    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/JavaScript_Overview
-                </a>
-            </ul>
-        </section>
-        <section class="slide" id="js-study">
-            <header>Gurus, books, resources</header>
-            <ul>
-                <li>
-                    Douglas Crockford <a href="http://crockford.com/">http://crockford.com/</a>
-                    <i class="icon-youtube-sign icon-large"></i>
-                </li>
-                <li>JavaScript: The Definitive Guide, 5th Edition (by David Flanagan)</li>
-                <li>JavaScript: The Good Parts (by Douglas Crockford)</li>
-                <li>Mozilla Developer Network (MDN) <a href="https://developer.mozilla.org/">https://developer.mozilla.org/</a></li>
-            </ul>
-        </section>
-        <section class="slide" id="js-ideas">
-            <header><i class="icon-key"></i> Key Ideas</header>
-            <ul>
-                <li>Load and go delivery</li>
-                <li>Loose typing</li>
-                <li>Objects <i class="icon-star"></i></li>
-                <li>Prototypal inheritance <i class="icon-star"></i></li>
-                <li>Lambda <i class="icon-star"></i></li>
-                <li>Linkage through global variables</li>
-            </ul>
-        </section>
-        <section class="slide" id="js-values">
-            <header>Values</header>
-            <ul>
-                <li>Numbers</li>
-                <li>Strings</li>
-                <li>Booleans</li>
-                <li>Objects</li>
-                <li>null</li>
-                <li>undefined</li>
-            </ul>
-        </section>
-        <section class="slide" id="js-numbers">
-            <header>Numbers</header>
-            <ul>
-                <li>Only one number type</li>
-                <li>64-bit floating point</li>
-            </ul>
-<pre><code class="javascript">0.1 + 0.2 === 0.30000000000000004;</code></pre>
-        </section>
-        <section class="slide" id="js-nan">
-            <header>NaN</header>
-            <ul>
-                <li>Special number: Not a Number</li>
-            </ul>
-<pre><code class="javascript">typeof NaN == "number"</code></pre>
-            <ul>
-                <li><i class="icon-warning-sign"></i> Any operation with NaN as an input results in NaN.</li>
-            </ul>
-<pre><code class="javascript">NaN == NaN; // false</code></pre>
-        </section>
-        <section class="slide" id="js-work-num">
-            <header>Working with numbers</header>
-<pre><code class="javascript">
+    <textarea id="source">
+class: center, middle
+# JavaScript
+---
+
+class: center, middle
+# JavaScript and Java
+![JavaScript is not Java](http://www.blogohblog.com/wp-content/pop/2008/07/funnyjavascript.gif)
+---
+
+# ECMAScript
+* ECMA
+* Standardized version of JavaScript, called ECMAScript
+---
+
+# Gurus, books, resources
+* Douglas Crockford http://crockford.com/
+  <i class="icon-youtube-sign icon-large"></i>
+* JavaScript: The Definitive Guide, 5th Edition (by David Flanagan)
+* JavaScript: The Good Parts (by Douglas Crockford)
+* Mozilla Developer Network (MDN) https://developer.mozilla.org/
+---
+
+# <i class="icon-key"></i> Key Ideas
+* Load and go delivery
+* Loose typing
+* Objects <i class="icon-star"></i>
+* Prototypal inheritance <i class="icon-star"></i>
+* Lambda <i class="icon-star"></i>
+* Linkage through global variables
+---
+
+# Values
+* Numbers
+* Strings
+* Booleans
+* Objects
+* null
+* undefined
+---
+
+# Numbers
+* Only one number type
+* 64-bit floating point
+
+```javascript
+0.1 + 0.2 === 0.30000000000000004;
+```
+---
+
+# NaN
+* Special number: Not a Number
+
+```javascript
+typeof NaN == "number"
+```
+
+* <i class="icon-warning-sign"></i> Any operation with NaN as an input results in NaN.
+
+```javascript
+NaN == NaN; // false
+```
+---
+
+# Working with numbers
+```javascript
 Number(value);
 parseInt(value, radix);
-</code></pre>
-<pre><code class="javascript">
+```
+```javascript
 Number("1notanumber") == NaN;
 parseInt("1notanumber", 10) == 1;
-</code></pre>
-        </section>
-        <section class="slide" id="js-strings">
-            <header>Strings</header>
-            <ul>
-                <li>No character type</li>
-                <li>Strings are immutable</li>
-                <li>Similar strings are equal (==)</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Strings
+* No character type
+* Strings are immutable
+* Similar strings are equal (==)
+
+```javascript
 'string' "string";
 string.length;
 String(value);
-</code></pre>
-        </section>
-        <section class="slide" id="js-null-undefined">
-            <header>null, undefined</header>
-            <ul>
-                <li>null - a value isn't anything</li>
-                <li>
-                    undefined - a value is not defined<br>
-                    default value for variables and parameters<br>
-                    the value of missing members in objects
-                </li>
-            </ul>
-        </section>
-        <section class="slide" id="js-bools">
-            <header>Booleans</header>
-            <ul>
-                <li>true</li>
-                <li>false</li>
-                <li>
-                    Boolean(value) similar to <strong>!!</strong> prefix<br>
-                    returns true for truthy values<br>
-                    returns false for falsy values
-                 </li>
-            </ul>
-        </section>
-        <section class="slide" id="js-falsy-truthy">
-            <header>Falsy and truthy values</header>
-            <ul>
-                <li>false</li>
-                <li>null</li>
-                <li>undefined</li>
-                <li>"" (empty string)</li>
-                <li>0</li>
-                <li>NaN</li>
-            </ul><br>
-            <i class="icon-info-sign"></i> All other values (including objects) are truthy.
-        </section>
-        <section class="slide" id="js-objects">
-            <header>Objects</header>
-            <ul>
-                <li>Everything (else) is an object.</li>
-                <li>Objects like Hashtables</li>
-                <li>Objects are dynamic</li>
-                <li>Objects inherit from objects</li>
-            </ul>
-        </section>
-        <section class="slide" id="js-ids">
-            <header>Identifiers</header>
-            <ul>
-                <li>Starts with a letter or _ or $</li>
-                <li>
-                    By convention ids start with lower case<br>
-                    Except for constructor functions which start with upper case
-                </li>
-            </ul>
-        </section>
-        <section class="slide" id="js-reserved">
-            <header>Reserved words</header>
-<pre><code class="javascript">
+```
+---
+
+# null, undefined
+* null - a value isn't anything
+* undefined - a value is not defined  
+  default value for variables and parameters  
+  the value of missing members in objects
+---
+
+# Booleans
+* true</li>
+* false</li>
+
+```javascript
+Boolean(value)
+```
+  * similar to **!!** prefix  
+  * returns true for truthy values  
+  * returns false for falsy values
+---
+
+# Falsy and truthy values
+* false
+* null
+* undefined
+* "" (empty string)
+* 0
+* NaN
+
+<i class="icon-info-sign"></i> All other values (including objects) are truthy.
+---
+
+# Objects
+* Everything (else) is an object
+* Objects like Hashtables
+* Objects are dynamic
+* Objects inherit from objects
+---
+
+# Identifiers
+* Starts with a letter or _ or $
+* By convention ids start with lower case  
+  Except for constructor functions which start with upper case
+---
+
+# Reserved words
+```javascript
 break, do, instanceof, typeof, case, else, new, var, catch, finally, return,
 void, continue, for, switch, while, debugger, function, this, with, default,
 if, throw, delete, in, try
 
 class, enum, extends, super, const, export, import
 implements, interface, let, package, private, protected, public, static, yield
-</code></pre>
-        </section>
-<section class="slide" id="js-eq">
-            <header>==, !=</header>
-            <ul>
-                <li>These operators can do type coercion</li>
-                <li>===, !== don't do type coercion</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# ==, !=
+* These operators can do type coercion
+* ===, !== don't do type coercion
+
+```javascript
 (2 == '2') == true;
 (2 === '2') == false;
-</code></pre>
-<pre><code class="javascript">
+```
+```javascript
 // Type coercion :( What's wrong with this thing?!
 '' == '0' // false
 0 == ''   // true
@@ -236,189 +165,183 @@ implements, interface, let, package, private, protected, public, static, yield
 false == null      // false
 false == undefined // false
 null == undefined  // true
-</code></pre>
-        </section>
-        <section class="slide" id="js-plus-op">
-            <header>+ operator</header>
-            <ul>
-                <li>
-                    Adds or concats<br>
-                </li>
-<pre><code class="javascript">
-"$" + 3 + 4 == "$34"
-</code></pre>
+```
+---
 
-                <li>
-                    Unary operator can convert strings to numbers<br>
-<pre><code class="javascript">
+# + operator
+* Adds or concats
+
+```javascript
+"$" + 3 + 4 == "$34"
+```
+
+* Unary operator can convert strings to numbers
+
+```javascript
 +"24" == 24;
 +"3" + (+"4") == 7;
-</code></pre>
-                </li>
-            </ul>
-        </section>
-        <section class="slide" id="js-guard-op">
-            <header>Guard operator</header>
-            <ul>
-                <li>aka <em>logical and</em></li>
-                <li>
-                    If first operand is truthy<br>
-                    then result is second operand<br>
-                    else result is first operand
-                </li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Guard operator
+* aka *logical and*
+* If first operand is truthy  
+  then result is second operand  
+  else result is first operand
+
+```javascript
 if (a) {
     return a.number;
 } else {
     return a;
 }
-</code></pre>
-            <ul>
-                <li>can be written as</li>
-            </ul>
-<pre><code class="javascript">
-return a && a.number;
-</code></pre>
-        </section>
-        <section class="slide" id="js-default-op">
-            <header>Default operator</header>
-            <ul>
-                <li>aka <em>logical or</em></li>
-                <li>
-                    If first operand is truthy<br>
-                    then result is first operand<br>
-                    else result is second operand
-                </li>
-            </ul>
-<pre><code class="javascript">
+```
+
+* can be written as
+
+```javascript
+return a &amp;&amp; a.number;
+```
+---
+
+# Default operator
+* aka *logical or*
+* If first operand is truthy  
+  then result is first operand  
+  else result is second operand
+
+```javascript
 function greet(name) {
     return 'Hello, ' + (name || 'anonymous') + '!';
 }
-</code></pre>
-        </section>
-        <section class="slide" id="js-with">
-            <header>With statement</header>
-<pre><code class="javascript">
+```
+---
+
+# With statement
+```javascript
 with (o) {
     member = null;
 }
-</code></pre>
-            <ul>
-                <li>
-                    What this claims to be:<br>
-                </li>
-            </ul>
-<pre><code class="javascript">o.member = null;</code></pre>
-            <ul>
-                <li>
-                    What if there's a global variable <em>member</em>?
-                </li>
-            </ul><br>
-            <i class="icon-warning-sign"></i> Really bad idea to use, unless you know what you're doing
-        </section>
-        <section class="slide" id="js-var">
-            <header>var statement</header>
-            <ul>
-                <li>Defines variables within a function</li>
-                <li>Types are not specified</li>
-                <li>
-                    Initial values are optional
-                </li>
-            </ul>
-<pre><code class="javascript">
+```
+* What this claims to be:
+
+```javascript
+o.member = null;
+```
+
+* What if there's a global variable *member*?
+
+<i class="icon-warning-sign"></i> Really bad idea to use, unless you know what you're doing
+---
+
+# var statement
+* Defines variables within a function
+* Types are not specified
+* Initial values are optional
+
+```javascript
 /* Example #1 */
 var name;
 var sum = 0;
 var a, b, c;
 var d = 'sup?', e;
-</code></pre>
-<pre><code class="javascript">
+```
+
+```javascript
 /* Example #2 */
 var a = x; // no error
 var x = 3;
-</code></pre>
-<pre><code class="javascript">
+```
+
+```javascript
 // Example #3
 var a, x;
 a = x;
 x = 3;
-</code></pre>
-        </section>
-        <section class="slide" id="js-funcs">
-            <header>Functions</header>
-            <ul>
-                <li>Declaration:</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Functions
+* Declaration:
+
+```javascript
 // Way #1
 function sum(a, b, c) {
     return a + b + c;
 }
+```
+```javascript
 // Way #2
 var sum = function (a, b, c) {
     return a + b + c;
 };
+```
+
+* Usage
+
+```javascript
 sum(1, 2, 3);
-</code></pre>
-        </section>
-        <section class="slide" id="js-scope">
-            <header><i class="icon-warning-sign"></i> Scope</header>
-            <ul>
-                <li>In JavaScript, {blocks} don't have scope</li>
-                <li>Only functions have scope</li>
-                <li>Variables defined in a function are not visible outside of the function.</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# <i class="icon-warning-sign"></i> Scope
+* In JavaScript, {blocks} don't have scope
+* Only functions have scope
+* Variables defined in a function are not visible outside of the function
+
+```javascript
 var a = 2;
 if (condition) {
     var a = 3;
 }
 // a == 3
-</code></pre>
-<pre><code class="javascript">
+```
+```javascript
 var a = 2;
 function func() {
     var a = 3;
 }
 func();
 // a == 2
-</code></pre>
-        </section>
-        <section class="slide" id="js-return">
-            <header>Return</header>
-<pre><code class="javascript">return expression;</code></pre>
-            <p>or</p>
-<pre><code class="javascript">return;</code></pre>
-            <ul>
-                <li>If there's no expression ther result is <strong>undefined</strong></li>
-                <li>Every function returns a value, no void-like thing</li>
-                <li>Except for constructor functions, whose default value is <strong>this</strong></li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Return
+```javascript
+return expression;
+```
+or
+```javascript
+return;
+```
+* If there's no expression then result is **undefined**
+* Every function returns a value, no void-like thing
+* Except for constructor functions, whose default value is **this**
+
+```javascript
 function noop() {}
 noop(); // undefined
-</code></pre>
-        </section>
-        <section class="slide" id="js-obj-literals">
-            <header>Object literals</header>
-<pre><code class="javascript">var empty = {};</code></pre>
-<pre><code class="javascript">var person = {name : 'Fred', surname: 'Bell'};
+```
+---
+
+# Object literals
+```javascript
+var empty = {};
+```
+```javascript
+var person = {name : 'Fred', surname: 'Bell'};
 var name = person.name;
 var surname = person['surname'];
-</code></pre>
-<pre><code class="javascript">
+```
+```javascript
 // Maker function
 function person(name, surname) {
-    return {
-        name: name,
-        surname: surname
-    };
+    return { name: name, surname: surname };
 }
 var fred = person('Fred', 'Bell');
 fred.friend = person('Mike', 'Palmer');
-</code></pre>
-<pre><code class="javascript">
+```
+```javascript
 someFunction({
     name : 'Fred',
     surname : 'Bell',
@@ -427,27 +350,26 @@ someFunction({
         surname : 'Palmer'
     }
 });
-</code></pre>
-<i class="icon-warning-sign"></i> Exceptions. ORLY?
-<pre><code class="javascript">
+```
+```javascript
+// Exceptions
 throw {
     type : 'AJAX error',
     message : '404 Resource not found'
 };
-</code></pre>
-        </section>
-        <section class="slide" id="js-linkage">
-            <header>Linkage and prototypal inheritance</header>
-            <ul>
-                <li>Objects created are similar to existing objects, but can be customized</li>
-                <li>Object customization is a lot less work than making a class, and less overhead, too.</li>
-                <li>Object may have a link to its prototype</li>
-                <li>Default prototype (if not specified) for an object is Object.prototype</li>
-                <li>Prototype is set during object creation</li>
-                <li>Can't change the link to a prototype of an object dynamically (in a standard way)</li>
-                <li>Storing to an object goes to that object</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Linkage and prototypal inheritance
+* Objects created are similar to existing objects, but can be customized
+* Object customization is a lot less work than making a class, and less overhead, too.
+* Object may have a link to its prototype
+* Default prototype (if not specified) for an object is Object.prototype
+* Prototype is set during object creation
+* Can't change the link to a prototype of an object dynamically (in a standard way)
+* Storing to an object goes to that object
+
+```javascript
 function person(name, surname) {
     return {
         name : name,
@@ -459,36 +381,33 @@ function employee(person, salary) {
     empl.salary = salary; // prototype was not changed
     return empl;
 }
-// fred --> person --> Object.prototype --> null
+// fred --&gt; person --&gt; Object.prototype --&gt; null
 var fred = employee(person('Fred', 'Bell'), 1000);
 var name = fred.name;
 var salary = fred.salary;
-</code></pre>
-        </section>
-        <section class="slide" id="js-obj-methods">
-            <header>Object methods</header>
-            <ul>
-                <li>Objects may (and mostly) inherit from Object.prototype</li>
-                <li>Objects may (and mostly) inherit some basic methods</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Object methods
+* Objects may (and mostly) inherit from Object.prototype
+* Objects may (and mostly) inherit some basic methods
+
+```javascript
 /* Is the member, specified by name argument, is a member of this object? */
 hasOwnProperty(name);
-</code></pre>
-            <ul>
-                <li><i class="icon-warning-sign"></i> No <strong>copy</strong> method</li>
-                <li><i class="icon-warning-sign"></i> No <strong>equals</strong> method</li>
-                <li><i class="icon-warning-sign"></i> <strong>==</strong> or <strong>===</strong> compares only references of objects</li>
-            </ul>
-        </section>
-        <section class="slide" id="js-constructors">
-            <header>Constructor functions</header>
-            <ul>
-                <li>aka <em>constructors</em></li>
-                <li>Constructor functions are functions called with the <strong>new</strong> operator</li>
-                <li>By convention name starts with upper case</li>
-            </ul>
-<pre><code class="javascript">
+```
+
+* <i class="icon-warning-sign"></i> No **copy** method
+* <i class="icon-warning-sign"></i> No **equals** method
+* <i class="icon-warning-sign"></i> **==** or **===** compares only references of objects
+---
+
+# Constructor functions
+* aka *constructors*
+* Constructor functions are functions called with the **new** operator
+* By convention name starts with upper case
+
+```javascript
 function Person(name, surname) {
     this.name = name;
     this.surname = surname;
@@ -496,18 +415,17 @@ function Person(name, surname) {
 var fred = new Person('Fred', 'Bell');
 var name = fred.name;
 var surname = fred.surname;
-</code></pre>
-        </section>
-        <section class="slide" id="js-obj-create">
-            <header>Object.create</header>
-            <ul>
-                <li>ECMAScript 5</li>
-                <li>Browser support: Firefox 4 (Gecko 2), Chrome 5, IE 9, Opera 11.50, Safari 5</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Object.create
+* ECMAScript 5
+* Browser support: Firefox 4 (Gecko 2), Chrome 5, IE 9, Opera 11.50, Safari 5
+
+```javascript
 Object.create(proto [, propertiesObject ]);
-</code></pre>
-<pre><code class="javascript">
+```
+```javascript
 var empty = Object.create(null); // pure empty object, no prototype
 typeof empty.toString === "undefined";
 
@@ -515,42 +433,38 @@ var fred = Object.create(Object.prototype);
 fred.name = 'Fred';
 fred.surname = 'Bell';
 typeof fred.toString === "function";
-</code></pre>
-        </section>
-        <section class="slide" id="js-obj-ref">
-            <header>Reference</header>
-            <ul>
-                <li>Objects can be passed as arguments to functions, and can be returned by functions</li>
-                <li><i class="icon-warning-sign"></i> Objects are passed by reference</li>
-                <li><i class="icon-warning-sign"></i> Objects are not passed by value</li>
-                <li><i class="icon-warning-sign"></i> The operators <strong>==</strong>, <strong>===</strong> compare objects by reference</li>
-            </ul>
-        </section>
-        <section class="slide" id="js-delete">
-            <header>Delete</header>
-            <ul>
-                <li>Used to delete members from objects</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Reference
+* Objects can be passed as arguments to functions, and can be returned by functions
+* <i class="icon-warning-sign"></i> Objects are passed by reference
+* <i class="icon-warning-sign"></i> Objects are not passed by value
+* <i class="icon-warning-sign"></i> The operators **==**, **===** compare objects by reference
+---
+
+# Delete
+* Used to delete members from objects
+
+```javascript
 delete object[member];
 delete object.member;
-</code></pre>
-<pre><code class="javascript">
+```
+```javascript
 var fred = { name : 'Fred', surname : 'Bell' };
 
 delete fred.name;
 delete fred['surname'];
 typeof fred.name === 'undefined';
 typeof fred.surname === 'undefined';
-</code></pre>
-        </section>
-        <section class="slide" id="js-arrays">
-            <header>Arrays</header>
-            <ul>
-                <li>Arrays inherit from objects</li>
-                <li>Arrays are dynamic</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Arrays
+* Arrays inherit from objects
+* Arrays are dynamic
+
+```javascript
 var nums = [1, 2, 3]; // array literal
 nums = new Array(1, 2, 3);
 nums.length === 3; // It's not the number of elements in array!!! WAT?!
@@ -569,18 +483,15 @@ nums.length === 99; // WAT?!
 // One more thing
 delete nums[1]; // [1, undefined, 3]
 nums.splice(1, 1); // [1, 3]
-</code></pre>
-            <ul>
-                <li>There are methods: concat, join, push, pop, shift, unshift, slice, sort, splice</li>
-                <li>Arrays inherit from <strong>Array.prototype</strong></li>
-            </ul>
-        </section>
-        <section class="slide" id="js-get-type">
-            <header>Determining the type </header>
-            <ul>
-                <li><strong>value.constructor</strong></li>
-            </ul>
-<pre><code class="javascript">
+```
+* There are methods: concat, join, push, pop, shift, unshift, slice, sort, splice
+* Arrays inherit from **Array.prototype**
+---
+
+# Determining the type
+* **value.constructor**
+
+```javascript
 var nums = [1, 2, 3];
 nums.constructor === Array; // true
 function Person(name, surname) {
@@ -590,11 +501,10 @@ function Person(name, surname) {
 var fred = new Person('Fred', 'Bell');
 fred.constructor === Person; // true
 fred.constructor === Object; // false
-</code></pre>
-            <ul>
-                <li><strong>instanceof</strong></li>
-            </ul>
-<pre><code class="javascript">
+```
+* **instanceof**
+
+```javascript
 var nums = [1, 2, 3];
 nums instanceof Array; // true
 function Person(name, surname) {
@@ -604,11 +514,11 @@ function Person(name, surname) {
 var fred = new Person('Fred', 'Bell');
 fred instanceof Person; // true
 fred instanceof Object; // true
-</code></pre>
-            <ul>
-                <li><strong>typeof</strong> <i class="icon-frown"></i></li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# **typeof** <i class="icon-frown"></i>
+```javascript
 typeof 1 === 'number';
 typeof 'abc' === 'string';
 typeof true === 'boolean';
@@ -618,19 +528,18 @@ typeof [] === 'object'; // WAT?!
 // and more :(
 typeof null === 'object';
 typeof undefined === 'undefined';
-</code></pre>
-        </section>
-        <section class="slide" id="js-using-funcs">
-            <header>Using functions</header>
-            <ul>
-                <li>Functions inherit from <strong>Function.prototype</strong></li>
-                <li><i class="icon-star"></i> Functions can be used as arguments to other functions</li>
-                <li><i class="icon-star"></i> Functions can be returned from other functions</li>
-                <li>Functions also inherit from <strong>Object.prototype</strong></li>
-                <li>Functions can store members</li>
-                <li>Functions can be variadic using <strong>arguments</strong></li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Using functions
+* Functions inherit from **Function.prototype**
+* <i class="icon-star"></i> Functions can be used as arguments to other functions
+* <i class="icon-star"></i> Functions can be returned from other functions
+* Functions also inherit from **Object.prototype**
+* Functions can store members
+* Functions can be variadic using **arguments**
+
+```javascript
 function sum() {
     var sum = 0;
     for (var i = 0; i &lt; arguments.length; i++) {
@@ -645,14 +554,12 @@ function wat() {
     arguments.constructor; // undefined!!! WAT?!
     arguments instanceof Array; // false!!! WAT?!
 }
-</code></pre>
-            <ul>
-                <li><strong>arguments.callee</strong></li>
-            </ul>
-        </section>
-        <section class="slide" id="js-funcs-decl">
-            <header><i class="icon-warning-sign"></i> More WATS?! on the way!</header>
-<pre><code class="javascript">
+```
+* **arguments.callee**
+---
+
+# <i class="icon-warning-sign"></i> More WATS?! on the way!
+```javascript
 // Example #1
 function update(sum) {
     typeof sum; // 'function'
@@ -670,23 +577,18 @@ function sum() {}
 typeof sum; // 'undefined'
 var sum = 0;
 var sum = function () {};
-</code></pre>
-            <i class="icon-warning-sign"></i> Don't try this at home!!!
-        </section>
-        <section class="slide" id="js-inner-funcs">
-            <header>Inner functions and closures</header>
-            <ul>
-                <li>Functions can be defined inside of other functions</li>
-                <li>
-                    An inner function has access to the variables and parameters of functions that it is contained within.
-                    This is known as Static Scoping or Lexical Scoping.
-                </li>
-                <li>
-                    The scope that inner function enjoys continues even after the parent functions have returned
-                    (this is called <strong>closure</strong>)
-                </li>
-            </ul>
-<pre><code class="javascript">
+```
+<i class="icon-warning-sign"></i> Don't try this at home!!!
+---
+
+# Inner functions and closures
+* Functions can be defined inside of other functions
+* An inner function has access to the variables and parameters of functions that it is contained within.
+  This is known as Static Scoping or Lexical Scoping.
+* The scope that inner function enjoys continues even after the parent functions have returned
+ (this is called **closure**)
+
+```javascript
 function simple_curry(func, arg) {
     return function () {
         return func(arg, arguments[0] || 0);
@@ -696,15 +598,14 @@ function add(a, b) { return a + b; }
 var add5 = simple_curry(add, 5);
 add5(); // 5
 add5(3); // 8
-</code></pre>
-        </section>
-        <section class="slide" id="js-func-objs">
-            <header>Function objects</header>
-            <ul>
-                <li>Functions are objects, so the can contain members</li>
-                <li>This can serve the same purpose as <strong>static</strong> members in other languages</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Function objects
+* Functions are objects, so the can contain members
+* This can serve the same purpose as **static** members in other languages
+
+```javascript
 function Person(name, surname) {
     this.name = name;
     this.surname = surname;
@@ -714,14 +615,13 @@ Person.create = function (name, surname) {
 };
 var fred = Person.create('Fred', 'Bell');
 var mike = Person.create('Mike');
-</code></pre>
-        </section>
-        <section class="slide" id="js-funcs-more">
-            <header>More on functions</header>
-            <ul>
-                <li><strong>thisObject.method()</strong></li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# More on functions
+* **thisObject.method()**
+
+```javascript
 function say(message) {
     return this.name + ' said: ' + message;
 }
@@ -731,22 +631,21 @@ fred.say('Hello'); // Fred said: Hello
 
 // Wait! What if?
 say('Hello'); // " said: Hello" (not everywhere you gonna see this output)
-</code></pre>
-            <ul>
-                <li><strong>bind</strong> method (ECMAScript 5)</li>
-            </ul>
-<pre><code class="javascript">
+```
+**bind** (ECMAScript 5)
+
+```javascript
 function say(message) {
     return (this.name || 'Anonymous') + ' said: ' + message;
 }
 say('Hello'); // Anonymous said: Hello
 var fredSays = say.bind({ name : 'Fred'});
 fredSays('Hello'); // Fred said: Hello
-</code></pre>
-            <ul>
-                <li><strong>call</strong> and <strong>apply</strong> methods</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# **call** and **apply** methods
+```javascript
 function say(message) {
     return (this.name || 'Anonymous') + ' said: ' + message;
 }
@@ -755,19 +654,18 @@ say.apply({ name : 'Fred'}, ['Hello']); // Fred said: Hello
 
 // func.call(thisBind, args...)
 // func.apply(thisBind, argsArray)
-</code></pre>
-        </section>
-        <section class="slide" id="js-type-augment">
-            <header>Augmenting Built-in Types</header>
-            <ul>
-                <li>Object.prototype</li>
-                <li>Array.prototype</li>
-                <li>Function.prototype</li>
-                <li>Number.prototype</li>
-                <li>String.prototype</li>
-                <li>Boolean.prototype</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Augmenting Built-in Types
+* Object.prototype
+* Array.prototype
+* Function.prototype
+* Number.prototype
+* String.prototype
+* Boolean.prototype
+
+```javascript
 // ECMAScript 5
 // IE 8 or less doesn't have trim
 if (!String.prototype.trim) {
@@ -776,14 +674,13 @@ if (!String.prototype.trim) {
     };
 }
 ' a '.trim(); // 'a'
-</code></pre>
-        </section>
-        <section class="slide" id="js-inherit-classic">
-            <header>Inheritance</header>
-            <ul>
-                <li>Classical inheritance with Object.create (ECMAScript 5)</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Inheritance
+* Classical inheritance with Object.create (ECMAScript 5)
+
+```javascript
 function Person(name, surname) {
     this.name = name || 'Unknown';
     this.surname = surname || 'Unknown';
@@ -801,14 +698,13 @@ Employee.prototype.updateSalary = function (val) {
     this.salary = this.salary + val;
 };
 var fred = new Employee('Fred', 'Bell', 1000);
-</code></pre>
-        </section>
-        <section class="slide" id="js-inherit-mixin">
-            <header>Inheritance</header>
-            <ul>
-                <li>Mixins</li>
-            </ul>
-<pre><code class="javascript">
+```
+---
+
+# Inheritance
+* Mixins
+
+```javascript
 function MyClass() {
     SuperClass.call(this);
     OtherSuperClass.call(this);
@@ -820,8 +716,11 @@ mixin(MyClass.prototype, OtherSuperClass.prototype); //mixin
 MyClass.prototype.myMethod = function() {
     // do a thing
 };
-</code></pre>
-<pre><code class="javascript">
+```
+---
+
+# Mixins implementation
+```javascript
 function copy(target, src) {
     for (var prop in src) {
         if (src.hasOwnProperty(prop)) target[prop] = src[prop];
@@ -843,35 +742,26 @@ var mike = new Person('Mike');
 fred.as = mixin;
 var friendFred = fred.as(Friend.prototype);
 friendFred.listen(); // Fred is listening
-</code></pre>
-        </section>
-        <section class="slide" id="js-more">
-            <header>More...</header>
-            <ul>
-                <li>
-                    Douglas Crockford: The JavaScript Programming Language<br>
-                    <a href="http://www.youtube.com/watch?v=v2ifWcnQs6M">http://www.youtube.com/watch?v=v2ifWcnQs6M</a>
-                    <i class="icon-youtube-sign icon-large"></i>
-                </li>
-                <li>
-                    Mozilla Developer Network (MDN) <a href="https://developer.mozilla.org/">https://developer.mozilla.org/</a>
-                </li>
-            </ul>
-        </section>
-        <footer>
-            <a href="javascript:void(0)" id="prev"><i class="icon-chevron-left"></i></a>
-            <a href="#go/home"><i class="icon-home icon-2x"></i></a>
-            <a href="javascript:void(0)" id="next"><i class="icon-chevron-right"></i></a><br>
-            <i class="icon-time"></i> <span id="time"></span>
-        </footer>
-        <script src="scripts/jquery-2.0.3.min.js"></script>
-        <script src="scripts/routie.min.js"></script>
-        <script src="scripts/mousetrap.min.js"></script>
-        <script src="scripts/nav.js"></script>
-        <script src="scripts/time.js"></script>
-        <script src="scripts/highlight.pack.js"></script>
-        <script>
-            hljs.initHighlightingOnLoad();
-        </script>
+```
+---
+
+# More
+* Douglas Crockford: The JavaScript Programming Language  
+ http://www.youtube.com/watch?v=v2ifWcnQs6M
+ <i class="icon-youtube-sign icon-large"></i>
+* Mozilla Developer Network (MDN) https://developer.mozilla.org/
+    </textarea>
+    <footer>
+        <i class="icon-time"></i> <span id="time"></span>
+    </footer>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.5.4.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var slideshow = remark.create({
+            highlightLanguage : 'javascript',
+            highlightStyle : 'vs'
+        });
+    </script>
+    <script src="scripts/time.js"></script>
     </body>
 </html>
