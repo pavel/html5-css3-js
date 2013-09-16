@@ -25,7 +25,7 @@ var total = nums.reduce(add);
 ```
 ```javascript
 function get(resource, success, error) {
-    // loads resouce from server
+    // loads resource from server
 }
 ```
 ```javascript
@@ -121,6 +121,7 @@ MyMathModule.sum = (function (add) {
     function sum(array) {
         return array.reduce(add);
     }
+    return sum;
 }(MyMathModule.add));
 ```
 or
@@ -235,13 +236,13 @@ asCircle.call(RoundButton.prototype);
 var asCircle = function () {
     function area() {
         return Math.PI * this.radius * this.radius;
-    };
+    }
     function grow() {
         this.radius++;
-    };
+    }
     function shrink() {
         this.radius--;
-    };
+    }
     return function () {
         this.area = area;
         this.grow = grow;
@@ -256,6 +257,103 @@ var RoundButton = function(radius, label) {
 };
 asCircle.call(RoundButton.prototype);
 ```
+---
+
+class: center, middle
+# Code convention
+---
+
+# Semicolons
+```javascript
+function person(name) {
+    return
+    {
+        name : name
+    };
+}
+var fred = person('Fred');
+fred; // undefined
+```
+---
+
+# Semicolons
+```javascript
+function person(name) {
+    return; // &lt;-- WAT?!
+    {
+        name : name
+    };
+}
+```
+---
+
+# Variables
+```javascript
+function contains(arr, el) {
+    for (ind = 0; ind &lt; arr.length; ind++) {
+        if (arr[ind] === el) return true;
+    }
+    return false;
+}
+```
+---
+
+# Variables
+```javascript
+function contains(arr, el) {
+    for (ind = 0; ind &lt; arr.length; ind++) {
+        if (arr[ind] === el) return true;
+    }
+    return false;
+}
+contains([1, 2, 3], 3); // true
+ind; // 2
+```
+---
+
+# Variables
+```javascript
+function contains(arr, el) {
+    var ind;
+    for (ind = 0; ind &lt; arr.length; ind++) {
+        if (arr[ind] === el) return true;
+    }
+    return false;
+}
+contains([1, 2, 3], 3); // true
+ind; // undefined
+```
+---
+
+# Variables
+```javascript
+function contains(arr1, arr2, el) {
+    var res = false;
+    for (var ind = 0; ind &lt; arr1.length; ind++) {
+        if (arr1[ind] === el) {
+            res = true;
+            break;
+        }
+    }
+    if (res === false) return res;
+    for (var ind = 0; ind &lt; arr2.length; ind++) {
+        if (arr2[ind] === el) return true;
+    }
+    return false;
+}
+```
+---
+
+# Eval
+* Slow
+* Unreliable
+
+```javascript
+eval('function add(a, b) { return a + b; }');
+add(2, 3); // 5
+```
+
+<i class="icon-warning-sign"></i> Eval is evil
 ---
 
 # Tools
