@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>DOM API</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/base.css">
+    </head>
+    <body>
+    <textarea id="source">
+class: center, middle
+# DOM API
+---
+
+# HTML (XML)
+HTML
+```html
+<div class="wide">
+    <p>Hello world</p>
+</div>
+```
+XML
+```xml
+<people>
+    <person>
+        <name>Fred</name>
+        <surname>Bell</surname>
+    </person>
+    <person>
+        <name>Mike</name>
+        <surname>Palmer</surname>
+    </person>
+</people>
+```
+---
+
+# Welcome to the family
+* Nodes, parents, children, siblings and the root
+```html
+<div>
+    <p>Hello world</p>
+    <p>Goodbye world</p>
+</div>
+```
+---
+
+# DHTML
+Dynamic HTML (DHTML) is a term used by some vendors to describe the combination of HTML,
+style sheets and scripts that allows documents to be animated.
+---
+
+# DOM
+The Document Object Model (DOM) is an API for HTML and XML documents.
+It defines the logical structure of documents and the way a document is accessed and manipulated.
+---
+
+# W3C
+The World Wide Web Consortium (W3C) establishes a standard for the DOM, called the W3C DOM.
+---
+
+class: center, middle
+# DOM Interfaces
+---
+
+# Window
+* The **window** object implements the **Window** interface, which in turn inherits from the **AbstractView**.
+* **window** is your global.
+
+```javascript
+// myscript.js
+a = 2;
+// is the same as
+window.a = 2;
+
+// The same for functions
+alert('Hello');
+// is the same as
+window.alert('Hello');
+```
+* The **window** object represents the window itself.
+* In a tabbed browser, such as Firefox, each tab contains its own **window** object.  
+  (but some methods apply to the whole window, and not the tab itself)
+---
+
+class: center, middle
+# Traversing
+---
+
+# Element by ID
+```javascript
+// Returns element found, or null otherwise
+document.getElementById(id)
+```
+```html
+<div id="greet">Hello world!</div>
+```
+```javascript
+var greet = document.getElementById('greet');
+```
+---
+
+# Elements by tag name
+```javascript
+// Returns elements found, or null otherwise
+elements = element.getElementsByTagName(tagName)
+```
+* *elements* is a *live* (it updates itself with the DOM tree automatically) **NodeList** of found elements
+  in the order they appear in the subtree.
+  If no elements were found, the NodeList is empty.
+* *element* is the element from where the search should start.
+  Note that only the descendants of this element are included in the search, but not the *element* itself.
+* *tagName* is the qualified name to look for.
+  The special string "*" represents all elements. For compatibility with XHTML, lower-case should be used.
+
+<i class="icon-warning-sign"></i> While the W3C DOM 3 Core specification says elements is a **NodeList** that was simply because of a an attempt to have the "core" specification not depend on the "html" specification at that time. The DOM 4 draft says that elements is an **HTMLCollection**.
+
+<i class="icon-warning-sign"></i> **element.getElementsByTagNameNS**
+---
+
+# Elements by tag name
+```html
+<div id="greet">
+    <p>Hi, Fred!</p>
+    <p>Hi, Mike!</p>
+</div>
+```
+```javascript
+var paragraphs = document.getElementsByTagName('p');
+// or
+var greet = document.getElementById('greet');
+paragraphs = greet.getElementsByTagName('p');
+
+// Working with results
+var first = paragraphs[0];
+var count = paragraphs.length;
+```
+---
+
+# Elements by class name
+```javascript
+// Returns elements found, or null otherwise
+elements = element.getElementsByClassName(names)
+```
+* *elements* is a **HTMLCollection** of found elements.
+* *names* is a string representing the list of class names to match; class names are separated by whitespace
+---
+
+# Elements by class name
+```html
+<div id="staff">
+    <div class="dev">
+        <div>Name: Fred</div>
+        <div>Surname: Bell</div>
+    </div>
+    <div class="dev">
+        <div>Name: Mike</div>
+        <div>Surname: Palmer</div>
+    </div>
+    <div class="qa">
+        <div>Name: Alice</div>
+        <div>Surname: Cooper</div>
+    </div>
+</div>
+```
+```javascript
+var developers = document.getElementsByClassName('dev');
+var fred = developers[0];
+
+var staff = document.getElementById('staff').getElementsByClassName('dev qa');
+var alice = staff[2];
+```
+---
+
+# Elements by name
+```javascript
+elements = document.getElementsByName(name)
+```
+
+* *elements* is an **HTMLCollection** of elements.
+* *name* is the value of the name attribute of the element.
+
+<i class="icon-info-sign"></i> The name attribute is only applicable to (X)HTML documents. The method returns all elements with a name attribute, such as **```<meta>```** or **```<object>```** or even if name is placed on elements which do not support a name attribute at all.
+---
+
+# Elements by name
+```html
+<p name="paragraph">Hello world!</p>
+<p name="paragraph">Bye world!</p>
+```
+```javascript
+var pars = document.getElementsByName('paragraph');
+```
+---
+
+class: center, middle
+# Selectors
+The query to find a specific element or elements in the document
+---
+
+class: center, middle
+# Selectors API
+---
+
+# Selectors API
+```javascript
+element = baseElement.querySelector(selectors)
+```
+* *element* is an element object found, or null otherwise.
+* *selectors* is a string containing one or more CSS selectors separated by commas.
+
+<i class="icon-info-sign"></i> IE 8, FF (Gecko) 3.5 (1.9.1), Opera 10, Chrome 1, Safari (webkit) 3.2 (525.3)
+---
+
+# Selectors API
+```html
+<div id="staff">
+    <div class="dev">
+        <div>Name: Fred</div>
+        <div>Surname: Bell</div>
+    </div>
+    <div class="dev">
+        <div>Name: Mike</div>
+        <div>Surname: Palmer</div>
+    </div>
+    <div class="qa">
+        <div>Name: Alice</div>
+        <div>Surname: Cooper</div>
+    </div>
+</div>
+```
+```javascript
+var staff = document.querySelector('#staff');
+var fred = staff.querySelector('.dev');
+var alice = staff.querySelector('div.qa');
+```
+---
+
+# Selectors API
+```javascript
+elementList = baseElement.querySelectorAll(selectors)
+```
+* *elementList* is a *non-live* list of element objects.
+* *selectors* is a group of selectors to match on.
+
+<i class="icon-info-sign"></i> IE 8, FF (Gecko) 3.5 (1.9.1), Opera 10, Chrome 1, Safari (webkit) 3.2 (525.3)
+---
+
+# Selectors API
+```html
+<div id="staff">
+    <div class="dev">
+        <div>Name: Fred</div>
+        <div>Surname: Bell</div>
+    </div>
+    <div class="dev">
+        <div>Name: Mike</div>
+        <div>Surname: Palmer</div>
+    </div>
+    <div class="qa">
+        <div>Name: Alice</div>
+        <div>Surname: Cooper</div>
+    </div>
+</div>
+```
+```javascript
+var staff = document.querySelector('#staff');
+var developers = staff.querySelectorAll('.dev');
+var qas = staff.querySelectorAll('.qa');
+```
+---
+
+# Resources
+* https://developer.mozilla.org/en-US/docs/DOM (MDN)
+* http://www.w3.org/DOM/ (W3C DOM)
+---
+
+# Helper
+```javascript
+```
+    </textarea>
+    <footer>
+        <i class="icon-time"></i> <span id="time"></span>
+    </footer>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.5.4.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var slideshow = remark.create({
+            highlightLanguage : 'javascript',
+            highlightStyle : 'vs'
+        });
+    </script>
+    <script src="scripts/time.js"></script>
+    </body>
+</html>
