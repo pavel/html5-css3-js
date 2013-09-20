@@ -319,6 +319,241 @@ Node.parentElement
 ```
 ---
 
+class: center, middle
+# Modifying the document
+---
+
+# textContent
+Text content for the element (input is escaped)
+```html
+Your name is <span id="nameElement">unknown</span><br>
+Enter your name: <input id="nameInput"> <input type="button" value="Save" onclick="save()">
+```
+```javascript
+var nameElement = document.getElementById('nameElement');
+var nameInput = document.getElementById('nameInput');
+function save() {
+    nameElement.textContent = nameInput.value;
+}
+```
+For input "Fred":
+```
+Your name is Fred
+```
+For input "```<b>Fred</b>```":
+```html
+Your name is <b>Fred</b>
+```
+In document:
+```html
+Your name is <span id="nameElement">&amp;lt;b&amp;gt;Fred&amp;lt;/b&amp;gt;</span>
+```
+---
+
+# innerHTML
+Content of the element (input is not escaped)
+```html
+Your name is <span id="nameElement">unknown</span><br>
+Enter your name: <input id="nameInput"> <input type="button" value="Save" onclick="save()">
+```
+```javascript
+var nameElement = document.getElementById('nameElement');
+var nameInput = document.getElementById('nameInput');
+function save() {
+    nameElement.innerHTML = nameInput.value;
+}
+```
+Security considerations
+```html
+<script>alert(1)</script>
+```
+<i class="icon-smile"></i> harmless in HTML5
+
+<i class="icon-warning-sign"></i> BUT
+```html
+<img src=x onerror=alert(1)>
+```
+<i class="icon-warning-sign"></i> Use with caution!!!
+---
+
+class: center, middle
+# Adding new elements
+---
+
+# Creating new elements
+```javascript
+element = document.createElement(tagName)
+```
+* *element* is the created element object.
+* *tagName* is a string that specifies the type of element to be created.
+  The nodeName of the created element is initialized with the value of tagName.  
+  <i class="icon-warning-sign"></i> Don't use qualified names (like "html:a") with this method.
+
+```javascript
+var div = document.createElement('div');
+div.textContent = 'Hello world';
+```
+* When called on a document object flagged as an HTML document, createElement lower-cases its argument prior to creating the element.
+* To create an element with a qualified name and namespace URI, use **document.createElementNS()** instead.
+---
+
+# Appending new elements
+```javascript
+child = element.appendChild(child)
+```
+* *element* is the parent element.
+* *child* is the node to append underneath element. Also returned.
+
+```javascript
+var div = document.createElement('div');
+div.textContent = 'Hello world';
+document.body.appendChild(div);
+```
+---
+
+# insertBefore
+```javascript
+insertedElement = parentElement.insertBefore(newElement, referenceElement)
+```
+* *insertedElement* - The node being inserted, that is newElement
+* *parentElement* - The parent of the newly inserted node.
+* *newElement* - The node to insert.
+* *referenceElement* - The node before which newElement is inserted.
+
+<i class="icon-info-sign"></i> If referenceElement is null, newElement is inserted at the end of the list of child nodes.
+```html
+<div id="container">
+    <div>World</div>
+</div>
+```
+```javascript
+var newDiv = document.createElement('div');
+newDiv.textContent = 'Hello';
+var div = document.getElementById('container');
+div.insertBefore(newDiv, div.firstElementChild);
+```
+---
+
+# Cloning
+```javascript
+dupNode = node.cloneNode(deep)
+```
+* *node* - The node to be cloned.
+* *dupNode* - The new node that will be a clone of node
+* *deep* (**almost Optional**) - true if the children of the node should also be cloned, or false to clone only the specified node. 
+
+<i class="icon-warning-sign"></i> cloneNode() may lead to duplicate element IDs in a document.
+---
+
+# Cloning from an external document
+```javascript
+node = document.importNode(externalNode, deep)
+```
+* *node* - The new node that is imported into the document.
+  The new node's **parentNode** is null, since it has not yet been inserted into the document tree.
+* *externalNode* - The node from another document to be imported.
+* *deep* (**almost Optional**) - A boolean, indicating whether the descendants of the imported node need to be imported.
+
+<i class="icon-warning-sign"></i> Beware of duplicate element IDs in a document.
+---
+
+class: center, middle
+# Elements with style
+---
+
+# Style
+```html
+<div id="greet" class="white-on-black">Hello, World!</div>
+```
+```javascript
+var greet = document.getElementById('greet');
+greet.style.backgroundColor = 'white';
+greet.style.color = 'black';
+```
+<i class="icon-info-sign"></i> Better use classes
+---
+
+# Classes
+```html
+<div id="greet" class="white-on-black">Hello, World!</div>
+```
+```javascript
+var greet = document.getElementById('greet');
+// the check is not necessary
+if (greet.classList.contains('white-on-black')) {
+    greet.classList.remove('white-on-black');
+    greet.classList.add('black-on-white');
+}
+```
+```javascript
+function invert(el) {
+    var classes = el.classList;
+    classes.toggle('white-on-black');
+    classes.toggle('black-on-white');
+}
+```
+---
+
+class: center, middle
+# Attributes
+---
+
+# Changing attributes
+```javascript
+element.setAttribute(name, value)
+element.getAttribute(name)
+element.hasAttribute(name)
+element.removeAttribute(name)
+```
+Predefined
+```javascript
+Element.id
+HTMLElement.lang
+HTMLElement.title
+HTMLInputElement.value
+```
+---
+
+# Removing elements
+```javascript
+oldChild = element.removeChild(child)
+```
+```html
+<div id="profile">
+    <div id="name">Fred</div>
+    <div id="surname">Bell</div>
+</div>
+```
+```javascript
+var profile = document.getElementById('profile');
+var surname = document.getElementById('surname');
+profile.removeChild(surname);
+```
+---
+
+# Replacing elements
+```javascript
+replacedNode = parentNode.replaceChild(newChild, oldChild)
+```
+```html
+<div id="profile">
+    <div id="name">Fred</div>
+    <div id="surname">Bell</div>
+</div>
+```
+```javascript
+var profile = document.getElementById('profile');
+var surname = document.getElementById('surname');
+var newSurname = document.createElement('span');
+newSurname.textContent = surname.textContent;
+profile.replaceChild(newSurname, surname);
+```
+---
+
+class: center, middle
+# Events
+---
+
 # Resources
 * https://developer.mozilla.org/en-US/docs/DOM (MDN)
 * http://www.w3.org/DOM/ (W3C DOM)
