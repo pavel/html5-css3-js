@@ -34,8 +34,14 @@ XML
 ```
 ---
 
+# Node and Element
+```html
+<div>Hello world!</div>
+```
+---
+
 # Welcome to the family
-* Nodes, parents, children, siblings and the root
+* Parents, children, siblings and the root
 ```html
 <div>
     <p>Hello world</p>
@@ -84,6 +90,10 @@ window.alert('Hello');
 
 class: center, middle
 # Traversing
+---
+
+class: center, middle
+# Finding elements
 ---
 
 # Element by ID
@@ -239,7 +249,7 @@ var alice = staff.querySelector('div.qa');
 ```javascript
 elementList = baseElement.querySelectorAll(selectors)
 ```
-* *elementList* is a *non-live* list of element objects.
+* *elementList* is a *non-live* **NodeList** of element objects.
 * *selectors* is a group of selectors to match on.
 
 <i class="icon-info-sign"></i> IE 8, FF (Gecko) 3.5 (1.9.1), Opera 10, Chrome 1, Safari (webkit) 3.2 (525.3)
@@ -266,6 +276,46 @@ elementList = baseElement.querySelectorAll(selectors)
 var staff = document.querySelector('#staff');
 var developers = staff.querySelectorAll('.dev');
 var qas = staff.querySelectorAll('.qa');
+```
+---
+
+class: center, middle
+# Parent, Children, Siblings
+---
+
+# Working with children
+```javascript
+// Returns a live HTMLCollection containing all children of the object.
+parent.children
+// Returns the Element that is the first child of the object, null if there is none.
+parent.firstElementChild
+// Returns the Element that is the last child of the object, null if there is none.
+parent.lastElementChild
+// Returns an unsigned long giving the amount of children that the object has.
+parent.childElementCount
+```
+---
+
+# Working with siblings
+```javascript
+// Returns the Element immediately prior to the specified one in its parent's children list, or null if there is none.
+element.previousElementSibling
+// Returns the Element immediately following the specified one in its parent's children list, or null if there is none.
+element.nextElementSibling
+```
+---
+
+# Node
+```javascript
+Node.childNodes // live result
+Node.firstChild
+Node.lastChild
+Node.nextSibling
+Node.previousSibling
+Node.parentNode
+```
+```javascript
+Node.parentElement
 ```
 ---
 
