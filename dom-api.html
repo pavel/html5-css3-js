@@ -554,14 +554,286 @@ class: center, middle
 # Events
 ---
 
+class: center, middle
+# Event flow
+---
+
+# Basic event flow
+1. Capture phase
+2. Target phase
+3. Bubble phase
+---
+
+class: center
+![Event flow](http://www.w3.org/TR/DOM-Level-3-Events/images/eventflow.png)
+---
+
+class: center, middle
+# Listening for events
+---
+
+# HTML attribute
+```html
+<div onclick="alert(2)">Click me</div>
+```
+<i class="icon-warning-sign"></i> Cons:
+
+* Handlers must be available through global context
+* No custom events
+* Inline handlers mess up the code
+* Low control level
+---
+
+# DOM element properties
+```html
+<div class="btn" id="btn-save">Save</div>
+```
+```javascript
+var saveBtn = document.getElementById('#btn-save');
+saveBtn.onclick = function (event) {
+    // save stuff
+};
+```
+<i class="icon-warning-sign"></i> Cons:
+
+* No custom events
+---
+
+# Event listeners
+```javascript
+target.addEventListener(type, listener, useCapture);
+```
+* type - A string representing the event type to listen for.
+* *listener* - The object that receives a notification when an event of the specified type occurs.
+  This must be an object implementing the EventListener interface, or simply a JavaScript function.
+* *useCapture* - (**Almost Optional**) if true, useCapture indicates that the user wishes to initiate capture.
+
+```html
+<div class="btn" id="btn-save">Save</div>
+```
+```javascript
+var saveBtn = document.getElementById('#btn-save');
+saveBtn.addEventListener('click', function (event) {
+    // save stuff
+}, false);
+```
+<i class="icon-warning-sign"></i> IE 6-8 **element.attachEvent**
+---
+
+class: center, middle
+# Working with events
+---
+
+# Canceling event
+```javascript
+event.preventDefault()
+```
+Cancels the event if it is cancelable, without stopping further propagation of the event.
+
+#### Example:
+```html
+<a href="http://www.google.com" id="google">Go to google</a>
+```
+```javascript
+var googleLink = document.getElementById('google');
+googleLink.onclick = function (event) {
+    event.preventDefault();
+    // do some custom stuff
+};
+```
+---
+
+# Stopping event propagation
+```javascript
+event.stopPropagation()
+```
+Prevents further propagation of the current event.
+#### Example:
+```html
+<div id="test">
+    Test
+    <div id="button">Button</div>
+</div>
+```
+```javascript
+document.getElementById('test').onclick = function () {
+    document.body.style.backgroundColor = 'red';
+};
+document.getElementById('button').onclick = function () {
+    document.body.style.backgroundColor = 'green';
+};
+```
+*Fixed with:*
+```javascript
+document.getElementById('button').onclick = function (event) {
+    event.stopPropagation();
+    document.body.style.backgroundColor = 'green';
+};
+```
+---
+
+class: center, middle
+# Creating and dispatching events
+---
+
+# Creating events
+```javascript
+var clickEvt = new Event('keypress');
+```
+Custom events
+```javascript
+var myCustomEvt = new CustomEvent('custom', { 'name' : 'Fred' });
+```
+Built-in events
+```javascript
+var event = new MouseEvent('click', {
+    'view': window,
+    'bubbles': true,
+    'cancelable': true
+});
+```
+---
+
+# Dispatching events
+```javascript
+not_canceled = target.dispatchEvent(event)
+```
+* *event* is the Event object to be dispatched.
+* *target* is used to initialize the Event.target and determine which event listeners to invoke.
+* <i class="icon-warning-sign"></i> *not_canceled* is false if at least one of the event handlers which handled this event
+  called Event.preventDefault(). Otherwise it returns true.
+
+```javascript
+var btn = document.getElementById('btn-save');
+var click = new Event('click');
+btn.dispatchEvent(click);
+```
+---
+
+# Event usage
+```html
+<div id="staff">
+    <div>
+        <span>Fred</span>
+        <a class="empl-delete" href="javascript:void(0)">Delete</a>
+    </div>
+    <div>
+        <span>Mike</span>
+        <a class="empl-delete" href="javascript:void(0)">Delete</a>
+    </div>
+    <div>
+        <span>Alice</span>
+        <a class="empl-delete" href="javascript:void(0)">Delete</a>
+    </div>
+</div>
+```
+```javascript
+var links = document.querySelectorAll('.empl-delete');
+Array.prototype.forEach.call(links, function (link) {
+    link.onclick = function () {
+        document.getElementById('staff').removeChild(this.parentElement);
+    };
+});
+```
+<i class="icon-frown"></i> Very bad solution
+---
+
+# Event delegation
+```html
+<div id="staff">
+    <div>
+        <span>Fred</span>
+        <a class="empl-delete" href="javascript:void(0)">Delete</a>
+    </div>
+    <div>
+        <span>Mike</span>
+        <a class="empl-delete" href="javascript:void(0)">Delete</a>
+    </div>
+    <div>
+        <span>Alice</span>
+        <a class="empl-delete" href="javascript:void(0)">Delete</a>
+    </div>
+</div>
+```
+```javascript
+var staff = document.getElementById('staff');
+staff.onclick = function (e) {
+    if (!(e.target instanceof HTMLAnchorElement)) return;
+    staff.removeChild(e.target.parentElement);
+};
+```
+---
+
+# Events notes
+* Any exceptions thrown inside an EventListener will not stop propagation of the event.
+* Exceptions in EventListener don't propagate to parent scope
+
+```javascript
+elem.onclick = function () {
+    throw { 'error' : 'Some error' };
+};
+elem.dispatchEvent(new Event('click'));
+alert('Handling');
+```
+* Returning *false* from EventListener
+
+```javascript
+elem.onclick = function() {
+    // some code
+    return false;
+};
+```
+http://www.w3.org/html/wg/drafts/html/master/webappapis.html#the-event-handler-processing-algorithm
+---
+
+class: center, middle
+# DOM API Gotchas
+---
+
+# Creating multiple elements
+```html
+<div class="employee">
+    <span>Employee name</span>
+</div>
+```
+```javascript
+var employees = ['Fred', 'Mike', 'Alice'];
+employees.forEach(function (name) {
+    var div = document.createElement('div');
+    div.classList.add('employee');
+    var span = document.createElement('span');
+    span.textContent = name;
+    div.appendChild(span);
+    document.body.appendChild(div);
+});
+```
+<i class="icon-frown"></i> Very slow
+---
+
+# Creating multiple elements faster
+```html
+<div class="employee">
+    <span>Employee name</span>
+</div>
+```
+```javascript
+var employees = ['Fred', 'Mike', 'Alice'];
+var template = '<div class="employee"><span>{name}</span></div>';
+var result = '';
+employees.forEach(function (name) {
+    result += template.replace('{name}', name);
+});
+document.body.innerHTML = result;
+```
+
+http://jsperf.com/create-element-vs-string
+
+<i class="icon-info-sign"></i> Use templating engines.
+---
+
 # Resources
 * https://developer.mozilla.org/en-US/docs/DOM (MDN)
 * http://www.w3.org/DOM/ (W3C DOM)
----
-
-# Helper
-```javascript
-```
     </textarea>
     <footer>
         <i class="icon-time"></i> <span id="time"></span>
