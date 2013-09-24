@@ -710,6 +710,29 @@ btn.dispatchEvent(click);
 ```
 ---
 
+class: center, middle
+# Removing event listeners
+---
+
+# Removing event listeners
+```javascript
+target.removeEventListener(type, listener, useCapture)
+```
+
+* *type* - A string representing the event type being removed.
+* *listener* - The listener parameter indicates the EventListener function to be removed.
+* *useCapture* (**Almost Optional**) - Specifies whether the EventListener being removed was registered as a capturing listener or not/
+  If not specified, useCapture defaults to false. If a listener was registered twice, one with capture and one without,
+  each must be removed separately. Removal of a capturing listener does not affect a non-capturing version of the same listener,
+  and vice versa.
+
+<i class="icon-warning-sign"></i> IE 6-8 **element.detachEvent**
+---
+
+class: center, middle
+# Event tips
+---
+
 # Event usage
 ```html
 <div id="staff">
@@ -764,7 +787,7 @@ staff.onclick = function (e) {
 ```
 ---
 
-# Events notes
+# More on events
 * Any exceptions thrown inside an EventListener will not stop propagation of the event.
 * Exceptions in EventListener don't propagate to parent scope
 
