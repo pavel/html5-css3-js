@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML5</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/base.css">
+        <style>
+            .html5-tech-logo {
+                height: 32px;
+                width: 32px;
+                vertical-align: middle;
+                margin-top: -9px;
+            }
+            .tech-classes img {
+                height: 16px;
+                width: 16px;
+                vertical-align: middle;
+                margin-top: -5px;
+            }
+            .tech-classes ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+            .tech-classes li {
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+    <textarea id="source">
+class: center, middle
+# <i class="icon-html5 icon-4x"></i>
+<h1>HTML5</h1>
+---
+
+class: tech-classes
+# Technology classes
+
+* ![Semantics](images/html5_semantics.svg) Semantics
+* ![Offline and Storage](images/html5_offline_storage.svg) Offline and Storage
+* ![Device access](images/html5_device_access.svg) Device access
+* ![Connectivity](images/html5_connectivity.svg) Connectivity
+* ![Multimedia](images/html5_multimedia.svg) Multimedia
+* ![3D, Graphics and Effects](images/html5_3d_effects.svg) 3D, Graphics and Effects
+* ![Perfomance and Integration](images/html5_perfintegration.svg) Perfomance and Integration
+* ![CSS3](images/html5_css3_styling.svg) CSS3
+---
+
+class: center, middle
+#<img src="images/html5_semantics.svg" class="html5-tech-logo"> Semantics
+---
+
+# HTML5 markup template
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    </body>
+</html>
+```
+
+#### Things to avoid
+HTML comments in scripts are useless:
+
+```html
+<script>
+<!--
+alert('My script is running');
+-->
+</script>
+```
+Obsolete elements:
+
+* **font**
+* **b**
+* **i**
+---
+
+# New elements
+* ```<article>```
+* ```<section>```
+* ```<nav>```
+* ```<aside>```
+* ```<header>```
+* ```<footer>```
+---
+
+# Forms in HTML5
+New elements:
+
+* ```<meter>``` <i class="icon-frown"></i>  
+  *Represents a scalar measurement within a known range*
+* ```<progress>``` <i class="icon-frown"></i>  
+  *Represents completion of a task*
+* ```<datalist>``` <i class="icon-star"></i>  
+  *Represents a set of option elements that can be used in combination
+  with the new list attribute for input to make dropdown menus (autocompletion input look alike)*
+* ```<keygen>```  
+  A control for key-pair generation
+* ```<output>```  
+  *Displays the results of a calculation*
+---
+
+# Datalist
+```html
+<form>
+    <input list="browsers" name="browser">
+    <datalist id="browsers">
+        <option value="Internet Explorer">
+        <option value="Firefox">
+        <option value="Chrome">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
+</form>
+```
+Browser support: FF(Gecko) 4.0(2.0), Chrome 20, IE 10, Opera 9.5
+
+<i class="icon-frown"></i> No support in Safari
+---
+
+# New ```<input>``` types
+* tel
+* search
+* url
+* email
+* datetime  
+  *For entering a date and time with the time zone set to UTC*
+* date  
+  *No time zone info*
+* month  
+  *No time zone info*
+* week  
+  *No time zone info*
+* time  
+  *No time zone info*
+* datetime-local  
+  *For entering a date and time with no time zone*
+* number
+* range
+* color
+---
+
+# New ```<input>``` attributes
+* autofocus
+* placeholder
+* form
+* required
+* autocomplete  
+  *For specifying that a field should not autocomplete or be pre-filled by the browser based on a user's past entries*
+* pattern
+* dirname  
+  *For submitting the directionality of the control with the form*
+* novalidate
+
+<i class="icon-frown"></i> Sad attributes:
+
+* formaction
+* formenctype
+* formmethod
+* formnovalidate
+* formtarget
+
+More here http://www.html5rocks.com/en/tutorials/forms/html5forms/
+---
+
+# More on semantics
+* Improvement on ```<iframe>```
+* MathML
+---
+
+class: center, middle
+#<img src="images/html5_offline_storage.svg" class="html5-tech-logo"> Offline and Storage
+---
+
+# Offline resources: the application cache
+Benefits <i class="icon-thumbs-up"></i>:
+
+* **Offline browsing**: users can navigate a site when offline.
+* **Speed**: cached resources are local, therefore load faster.
+* **Reduced server load**: the browser only downloads resources that have changed.
+
+<i class="icon-warning-sign"></i> Browser support: Chrome 4.0, FF 3.5, IE 10, Opera 10.6, Safari 4
+---
+
+# Enabling the application cache
+```html
+<html manifest="example.appcache">
+  ...
+</html>
+```
+The *manifest* attribute references a cache manifest file,
+which is a text file that lists resources (files) that the browser should cache for your application.
+---
+
+# Document loading
+The use of an application cache modifies the normal process of loading a document:
+
+* If an application cache exists, the browser loads the document and its associated resources directly from the cache,
+  without accessing the network. This speeds up the document load time.
+* The browser then checks to see if the cache manifest has been updated on the server.
+* If the cache manifest has been updated, the browser downloads a new version of the manifest
+  and the resources listed in the manifest. This is done in the background and does not affect performance significantly.
+
+https://developer.mozilla.org/en-US/docs/HTML/Using_the_application_cache#Loading_documents
+---
+
+# Cache manifest file
+File consists of sections:
+
+* **CACHE:**  
+  This is the default section for entries in a cache manifest file.
+  Files listed under the CACHE: section header (or immediately after the CACHE MANIFEST line)
+  are explicitly cached after they're downloaded for the first time.
+* **NETWORK:**  
+  Files listed under the NETWORK: section header in the cache manifest file are white-listed resources that
+  require a connection to the server.
+  All requests to such resources bypass the cache, even if the user is offline. Wildcards may be used.
+* **FALLBACK:**  
+  The FALLBACK: section specifies fallback pages the browser should use if a resource is inaccessible.
+  Each entry in this section lists two URIs—the first is the resource,
+  the second is the fallback. Both URIs must be relative and from the same origin as the manifest file. Wildcards may be used. 
+---
+
+# Cache manifest file example
+```text
+CACHE MANIFEST
+# v1 2011-08-14
+# This is another comment
+index.html
+cache.html
+style.css
+image1.png
+
+# Use from network if available
+NETWORK:
+network.html
+
+# Fallback content
+FALLBACK:
+/ fallback.html
+```
+---
+
+class: center, middle
+# More on cache
+https://developer.mozilla.org/en-US/docs/HTML/Using_the_application_cache
+---
+
+# Online and offline events
+```javascript
+navigator.onLine
+```
+```javascript
+window.addEventListener('load', function() {
+    var status = document.getElementById('status');
+
+    function updateOnlineStatus(event) {
+        var condition = navigator.onLine ? 'online' : 'offline';
+
+        status.className = condition;
+        status.innerHTML = condition.toUpperCase();
+
+        console.log('Event: ' + event.type + '; Status: ' + condition);
+    }
+
+    window.addEventListener('online',  updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+});
+```
+---
+
+class: center, middle
+# Client-side session and persistent storage (aka DOM Storage)
+By Web Hypertext Application Technology Working Group (aka WHATWG)
+---
+
+# Interface
+```idl
+interface Storage {
+  readonly attribute unsigned long length;
+  [IndexGetter] DOMString key(in unsigned long index);
+  [NameGetter] DOMString getItem(in DOMString key);
+  [NameSetter] void setItem(in DOMString key, in DOMString data);
+  [NameDeleter] void removeItem(in DOMString key);
+  void clear();
+};
+```
+---
+
+# Storage types
+* **sessionStorage** (Chrome 5, FF 2, IE 8, Opera 10.50, Safari 4)  
+  A global object that maintains a storage area that's available for the duration of the page session.
+  A page session lasts for as long as the browser is open and survives over page reloads and restores.
+  Opening a page in a new tab or window will cause a new session to be initiated.  
+* **localStorage** (Chrome 4, FF 3.5, IE 8, Opera 10.50, Safari 4)  
+  localStorage is the same as sessionStorage with same same-origin rules applied but it is persistent.  
+---
+
+# More on Offline and Storage
+* IndexedDB  
+  https://developer.mozilla.org/en-US/docs/IndexedDB
+* Using files from web application  
+  https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications
+---
+
+class: center, middle
+#<img src="images/html5_device_access.svg" class="html5-tech-logo"> Device access
+---
+
+# Geolocation
+```javascript
+navigator.geolocation
+```
+* Getting current position
+
+```javascript
+navigator.geolocation.getCurrentPosition(function (position) {
+    do_something(position.coords.latitude, position.coords.longitude);
+});
+```
+
+* Watching the current position
+
+```javascript
+var watchID = navigator.geolocation.watchPosition(function (position) {
+    do_something(position.coords.latitude, position.coords.longitude);
+});
+```
+```javascript
+navigator.geolocation.clearWatch(watchID);
+```
+<i class="icon-warning-sign"></i> Chrome 5, FF 3.5, IE 9, Opera 10.60 (removed in 15.0, reintroduced in 16.0), Safari 5
+---
+
+# Geolocation
+Fine tuning response
+```javascript
+function geo_success(position) {
+    do_something(position.coords.latitude, position.coords.longitude);
+}
+
+function geo_error() {
+    alert("Sorry, no position available.");
+}
+
+var geo_options = {
+    enableHighAccuracy: true, 
+    maximumAge        : 30000, 
+    timeout           : 27000
+};
+
+var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+```
+---
+
+# More on Device access
+* Using the Camera API  
+  https://developer.mozilla.org/en-US/docs/DOM/Using_the_Camera_API
+* Touch events  
+  https://developer.mozilla.org/en-US/docs/DOM/Touch_events
+* Detecting device orientation  
+  https://developer.mozilla.org/en-US/docs/Detecting_device_orientation
+* Pointer Lock API  
+  https://developer.mozilla.org/en-US/docs/API/Pointer_Lock_API
+---
+
+class: center, middle
+#<img src="images/html5_connectivity.svg" class="html5-tech-logo"> Connectivity
+---
+
+# Web Sockets
+WebSockets is an advanced technology that makes it possible to open an interactive communication session
+between the user's browser and a server.
+
+* RFC 6455 : Chrome 16, FF 11, IE 10, Opera 12.10, Safari 6
+---
+
+# Using web sockets in a browser
+```javascript
+var socket = new WebSocket('ws://www.myapp.org/');
+socket.onopen = function () {
+    socket.send('Hello world');
+}
+socket.onmessage = function (event) {
+    if (event.data === 'close') socket.close();
+    console.log(event.data);
+};
+```
+
+https://github.com/sockjs (WebSocket emulation)
+---
+
+# Server-sent events (aka SSE)
+```javascript
+var eventSource = new EventSource('sse.html');
+eventSource.onmessage = function (event) {
+    console.log(e.data);
+};
+```
+```javascript
+eventSource.addEventListener('close', function (event) {
+    console.log('Close event from server: ' + event.data);
+});
+eventSource.onerror = function (event) {
+    console.log('SSE error');
+};
+```
+
+<i class="icon-warning-sign"></i> Chrome 9, FF 6, IE (Not supported), Opera 11, Safari 5
+
+https://developer.mozilla.org/en-US/docs/Server-sent_events/Using_server-sent_events
+---
+
+# More on Connectivity
+WebRTC (https://developer.mozilla.org/en-US/docs/WebRTC)
+---
+
+class: center, middle
+#<img src="images/html5_multimedia.svg" class="html5-tech-logo"> Multimedia
+---
+
+# HTML5 audio and video
+```html
+<video src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls>
+    Your browser does not support the <code>video</code> element.
+</video>
+<audio src="/test/audio.ogg">
+    <p>Your browser does not support the audio element.</p>
+</audio>
+```
+Multiple sources
+```html
+<video controls>
+    <source src="foo.ogg" type="video/ogg">
+    <source src="foo.mp4" type="video/mp4">
+    Your browser does not support the <code>video</code> element.
+</video>
+```
+---
+
+# Controlling media playback
+```html
+<audio id="demo" src="audio.mp3"></audio>
+<div>
+    <button onclick="document.getElementById('demo').play()">Play the Audio</button>
+    <button onclick="document.getElementById('demo').pause()">Pause the Audio</button>
+    <button onclick="document.getElementById('demo').volume+=0.1">Increase Volume</button>
+    <button onclick="document.getElementById('demo').volume-=0.1">Decrease Volume</button>
+</div>
+```
+---
+
+# Fallback to flash
+```html
+<video src="video.ogv" controls>
+    <object data="flvplayer.swf" type="application/x-shockwave-flash">
+        <param value="flvplayer.swf" name="movie"/>
+    </object>
+</video>
+```
+---
+
+class: center, middle
+# More on audio and video
+https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video
+---
+
+# More on Multimedia
+* WebRTC  
+  https://developer.mozilla.org/en-US/docs/WebRTC
+* Using the Camera API  
+  https://developer.mozilla.org/en-US/docs/DOM/Using_the_Camera_API
+* ```<track>``` element and WebVTT  
+  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track    
+  https://developer.mozilla.org/en-US/docs/HTML/WebVTT
+---
+
+class: center, middle
+#<img src="images/html5_3d_effects.svg" class="html5-tech-logo"> 3D, Graphics and Effects
+---
+    </textarea>
+    <footer>
+        <i class="icon-time"></i> <span id="time"></span>
+    </footer>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.5.4.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var slideshow = remark.create({
+            highlightLanguage : 'javascript',
+            highlightStyle : 'vs'
+        });
+    </script>
+    <script src="scripts/time.js"></script>
+    </body>
+</html>
