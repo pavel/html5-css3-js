@@ -101,7 +101,7 @@ New elements:
   *Represents a set of option elements that can be used in combination
   with the new list attribute for input to make dropdown menus (autocompletion input look alike)*
 * ```<keygen>```  
-  A control for key-pair generation
+  *A control for key-pair generation*
 * ```<output>```  
   *Displays the results of a calculation*
 ---
@@ -484,6 +484,191 @@ https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_vi
 class: center, middle
 #<img src="images/html5_3d_effects.svg" class="html5-tech-logo"> 3D, Graphics and Effects
 ---
+
+# SVG
+**Scalable Vector Graphics (SVG)** is an XML markup language for describing two-dimensional
+vector graphics. SVG is essentially to graphics what XHTML is to text.
+
+<i class="icon-info-sign"></i> It is explicitly designed to work with other W3C standards such as CSS, DOM and
+SMIL (Synchronized Multimedia Integration Language).
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg> 
+```
+---
+
+# More on SVG
+* http://raphaeljs.com/
+* http://d3js.org/
+---
+
+# ```<canvas>``` element
+Used to draw graphics using scripting (usually JavaScript).
+It can, for instance, be used to draw graphs, make photo compositions or do simple (and not so simple) animations.
+
+https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial
+---
+
+# More on 3D, Graphics ans Effects
+* WebGL (FF 4, Chrome 9, Opera 12, Safari 5.1, IE 11)  
+  https://developer.mozilla.org/en-US/docs/Web/WebGL
+---
+
+class: center, middle
+#<img src="images/html5_perfintegration.svg" class="html5-tech-logo"> Perfomance and Integration
+---
+
+# JavaScript perfomance
+* JIT-compiling JavaScript engines  
+  *The new generation of JavaScript engines is much more powerful, leading to greater performance.*
+---
+
+# History API
+Added support for manipulation the contents of the history stack.
+
+Before HTML5:
+
+```javascript
+window.history.back();
+window.history.forward();
+window.history.go(-1);
+window.history.go(1);
+window.history.length;
+```
+
+With HTML5:
+```javascript
+history.pushState({ page : 2 }, 'page 2', 'page2.html');
+history.replaceState({ page : 3 }, 'page 3', 'page3.html');
+var currentState = history.state;
+```
+---
+
+# History API : popstate event
+A *popstate* event is dispatched to the window every time the active history entry changes.
+
+```javascript
+window.onpopstate = function (event) {
+    alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+};
+```
+---
+
+# History API : Browser support
+* replaceState, pushState (Chrome 5, FF 4, IE 10, Opera 11.50, Safari 5)
+* history.state (Chrome 18, FF 4, IE 10, Opera 11.50, Safari 5)
+---
+
+# Editable content
+```html
+<!DOCTYPE html>
+<html>
+    <body>
+        <div contenteditable="true">
+            This text can be edited by the user.
+        </div>
+    </body>
+</html> 
+```
+
+FF 3.5, Chrome 4, IE 5.5, Safari 3.1, Opera 9
+---
+
+# Drag and drop support
+Drag events:
+
+* dragstart
+* dragenter
+* dragover
+* dragleave
+* drag
+* drop
+* dragend
+
+http://www.html5rocks.com/en/tutorials/dnd/basics/
+
+<i class="icon-frown"></i> Poor IE support  
+<i class="icon-thumbs-up"></i> Use JavaScript libraries
+http://www.dropzonejs.com/
+---
+
+# Web workers
+Dedicated Web Workers provide a simple means for web content to run scripts in background threads.
+
+Spawning a worker:
+```javascript
+var myWorker = new Worker('my_task.js');
+
+myWorker.onmessage = function (event) {
+    console.log('Message from the worker!');
+};
+myWorker.onerror = function (error) {
+    console.log('Worker error: ' + error);
+};
+```
+```javascript
+var myWorker = new Worker('my_task.js');
+
+myWorker.addEventListener('message', function (oEvent) {
+    console.log('Event from the worker!');
+}, false);
+
+myWorker.postMessage(''); // start the worker.
+// Terminating worker
+myWorker.terminate();
+```
+---
+
+# Worker
+```javascript
+// my_task.js
+
+// Importing
+importScripts('helper.js');
+
+// Message sending
+postMessage("I'm working before postMessage");
+
+// Message receiving
+onmessage = function (event) {
+    postMessage("Hi " + event.data);
+};
+
+// Closing self
+self.close();
+```
+---
+
+class: center, middle
+# More on Web Workers
+https://developer.mozilla.org/en-US/docs/Web/Guide/Performance/Using_web_workers
+---
+
+# More on Perfomance and Integration
+* Focus management (document.activeElement, document.hasFocus())  
+  https://developer.mozilla.org/en-US/docs/HTML/Focus_management_in_HTML
+* Pointer Lock API  
+  https://developer.mozilla.org/en-US/docs/WebAPI/Pointer_Lock
+* Fullscreen API  
+  https://developer.mozilla.org/en-US/docs/DOM/Using_full-screen_mode
+* requestAnimationFrame  
+  https://developer.mozilla.org/en-US/docs/DOM/window.requestAnimationFrame
+---
+
+# Web Components : future of the Web
+
+<i class="icon-youtube icon-large"></i> http://www.youtube.com/watch?v=fqULJBBEVQE 
+
+http://www.polymer-project.org/polymer.html
+---
+
+# HTML5 links
+
+* http://www.html5rocks.com/en/
+* https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5
+* http://www.webplatform.org/
     </textarea>
     <footer>
         <i class="icon-time"></i> <span id="time"></span>
