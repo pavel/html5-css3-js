@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CSS</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/base.css">
+        <style>
+            .selectors > ul {
+                display: inline-block;
+                vertical-align: top;
+                list-style-type: none;
+                width: 44%;
+            }
+            .selectors li:before {
+                content: "\f111";
+                font-family: FontAwesome;
+                font-size: 0.2em;
+                vertical-align: middle;
+                margin: 0 2em 0 0;
+            }
+            .selectors li.css3:before {
+                content: "\f13c";
+                font-size: 0.7em;
+                margin: 0 0.5em 0 0;
+            }
+            .rounding-errors .result {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+            .rounding-errors .result p {
+                height: 5em;
+                overflow: hidden;
+            }
+            .rounding-errors .result img {
+                max-width: 95%;
+            }
+            .menu-demo .menu {
+                background-color: red;
+            }
+            .menu-demo .menu .menu-item {
+                display: inline-block;
+                background-color: lightgray;
+                padding: 1em;
+            }
+            .menu-demo .menu-table {
+                background-color: red;
+                display: table;
+            }
+            .menu-demo .menu-table .menu-item {
+                display: table-cell;
+                background-color: lightgray;
+                padding: 1em;
+            }
+            .big-css img {
+                width: 50%;
+            }
+            .area-left, .area-right {
+              display: inline-block;
+              vertical-align: top;
+              width: 50%;
+            }
+            .area-left {
+              background-color: orange;
+            }
+            .area-right {
+              background-color: yellowgreen;
+            }
+            .box-sizing-padding .area-left, .box-sizing-padding .area-right {
+                padding: 1em;
+            }
+            .box-sizing-fixed .area-left, .box-sizing-fixed .area-right {
+                padding: 1em;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+    <textarea id="source">
+class: center, middle
+# <i class="icon-css3 icon-4x"></i>
+<h1>CSS</h1>
+---
+class: center, middle
+# Selectors
+---
+
+class: selectors
+# Selectors
+http://www.w3.org/TR/css3-selectors/#selectors
+
+* `*`
+* E
+* E[foo]
+* E[foo="bar"]
+* E[foo~="bar"]
+<li class="css3">E[foo^="bar"]</li>
+<li class="css3">E[foo$="bar"]</li>
+<li class="css3">E[foo*="bar"]</li>
+* E[foo|="en"]
+<li class="css3">E:root</li>
+<li class="css3">E:nth-child(n)</li>
+<li class="css3">E:nth-last-child(n)</li>
+<li class="css3">E:nth-of-type(n)</li>
+<li class="css3">E:nth-last-of-type(n)</li>
+<li class="css3">E:first-child</li>
+<li class="css3">E:last-child</li>
+<li class="css3">E:first-of-type</li>
+<li class="css3">E:last-of-type</li>
+<li class="css3">E:only-child</li>
+<li class="css3">E:only-of-type</li>
+<li class="css3">E:empty</li>
+
+
+* E:link
+* E:visited
+* E:active
+* E:hover
+* E:focus
+<li class="css3">E:target</li>
+* E:lang(fr)
+<li class="css3">E:enabled</li>
+<li class="css3">E:disabled</li>
+<li class="css3">E:checked</li>
+* E::first-line
+* E::first-letter
+* E::before
+* E::after
+* E.warning
+* E#myid
+<li class="css3">E:not(s)</li>
+* E F
+* E &gt; F
+* E + F
+<li class="css3">E ~ F</li>
+
+---
+# Selector's specificity
+http://www.w3.org/TR/css3-selectors/#specificity
+
+A selector's specificity is calculated as follows:
+
+* count the number of ID selectors in the selector (= a)
+* count the number of class selectors, attributes selectors, and pseudo-classes in the selector (= b)
+* count the number of type selectors and pseudo-elements in the selector (= c)
+* ignore the universal selector
+
+Selectors inside the negation pseudo-class are counted like any other, but the negation itself does not count as a pseudo-class.
+Concatenating the three numbers a-b-c (in a number system with a large base) gives the specificity.
+
+<i class="icon-warning-sign"></i> Repeated occurrances of the same simple selector are allowed and do increase specificity.  
+<i class="icon-warning-sign"></i> Inline styles have top specificity.
+---
+
+# Specifity example
+```css
+*               /* a=0 b=0 c=0 -&gt; specificity =   0 */
+LI              /* a=0 b=0 c=1 -&gt; specificity =   1 */
+UL LI           /* a=0 b=0 c=2 -&gt; specificity =   2 */
+UL OL+LI        /* a=0 b=0 c=3 -&gt; specificity =   3 */
+H1 + *[REL=up]  /* a=0 b=1 c=1 -&gt; specificity =  11 */
+UL OL LI.red    /* a=0 b=1 c=3 -&gt; specificity =  13 */
+LI.red.level    /* a=0 b=2 c=1 -&gt; specificity =  21 */
+#x34y           /* a=1 b=0 c=0 -&gt; specificity = 100 */
+#s12:not(FOO)   /* a=1 b=0 c=1 -&gt; specificity = 101 */
+```
+---
+# Inline styles example
+```xml
+<li id="super-item" style="color: red">What's my color?</li>
+```
+```css
+li { color: green; }
+#super-item { color: orange; }
+```
+---
+
+# Equal specificity
+```xml
+<div class="red yellow">Hello world</div>
+```
+
+```css
+/* Style #1 */
+.yellow {
+  background-color: yellow;
+}
+.red {
+  background-color: red;
+}
+```
+```css
+/* Style #2 */
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+```
+---
+
+class: center, middle
+# Specificity tools
+http://specificity.keegan.st/  
+---
+
+class: center, middle
+# Positioning
+http://www.w3.org/TR/css3-positioning/
+---
+
+# CSS positioning properties
+```css
+.pos {
+    top: 10px;
+    bottom: 40px;
+    left: 20px;
+    right: 30px;
+}
+```
+---
+
+# Positioning schemes
+In CSS, a box may be laid out according to three positioning schemes:
+
+1. **Normal flow**  
+   In CSS, normal flow includes block formatting of block-level boxes, inline formatting of inline-level boxes,
+   and relative positioning of block-level and inline-level boxes.
+2. **Floats**  
+   In the float model, a box is first laid out according to the normal flow,
+   then taken out of the flow and positioned, typically to the left or right. Content may flow along the side of a float.
+3. **Absolute positioning**  
+   In the absolute positioning model, a box is removed from the normal flow entirely (it has no impact on later siblings)
+   and assigned a position with respect to a containing block.
+---
+
+# Normal flow
+Boxes in the normal flow belong to a formatting context, which may be block or inline, but not both simultaneously.
+Block-level boxes participate in a block formatting context. Inline-level boxes participate in an inline formatting context.
+
+```css
+.rel {
+    position: relative;
+}
+```
+---
+
+# Floats
+A float is a box that is positioned within content, often left or right on the current line. The most interesting characteristic of a float (or "floated" or "floating" box") is that inline-level content may flow along its side (or be prohibited from doing so by the ‘clear’ property) or around the floated box.
+```xml
+<div class="float-left">Hi</div><div class="float-right">there!</div>
+  And some more text! Yeah lots of text here!<br> Ok!<br> Ok!<br> Great!
+```
+```css
+div {
+  width: 100px;
+  height: 50px;
+  border: 1px solid red;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+```
+---
+
+# Absolute positioning
+In the absolute positioning model, a box is explicitly offset with respect to its containing block.
+It is removed from the normal flow entirely (it has no impact on later siblings).
+An absolutely positioned box establishes a new containing block for normal flow children and absolutely
+(but not fixed or page) positioned descendants.
+However, the contents of an absolutely positioned element do not flow around any other boxes.
+They may obscure the contents of another box (or be obscured themselves), depending on the stack levels of the overlapping boxes.
+
+```css
+.abs { position: absolute; }
+```
+```xml
+<!-- #1 -->
+<div>
+    <div class="abs" style="left: 0; right: 0; top: 0; bottom: 0;">Hello</div>
+    <div style="text-align: right">world!</div>
+</div>
+```
+```xml
+<!-- #2 -->
+<div class="abs">
+    <div class="abs" style="left: 0; right: 0; top: 0; bottom: 0;">Hello</div>
+    <div style="text-align: right">world!</div>
+</div>
+```
+```xml
+<!-- #3 -->
+<div class="rel">
+    <div class="abs" style="left: 0; right: 0; top: 0; bottom: 0;">Hello</div>
+    <div style="text-align: right">world!</div>
+</div>
+```
+---
+
+class: center, middle
+# Rounding errors
+---
+
+# Explaining
+```xml
+<div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+</div>
+```
+
+```css
+.container { width: 50px; }
+.item {
+    width: 25%;
+    background-color: blue;
+}
+```
+---
+
+class: center, rounding-errors
+# Rounding errors in different browsers
+http://johnalbin.github.io/fluid-grid-rounding-errors/  
+
+<div class="result">
+### Firefox 13  
+![ff](http://johnalbin.github.io/fluid-grid-rounding-errors/images/firefox-13.png)
+</div><!--
+--><div class="result">
+### Chrome 21 dev  
+![chrome](http://johnalbin.github.io/fluid-grid-rounding-errors/images/chrome-21-dev.png)
+</div><!--
+--><div class="result">
+### Safari 5
+![safari](http://johnalbin.github.io/fluid-grid-rounding-errors/images/safari-5.png)
+</div><!--
+--><div class="result">
+### IE7
+![ie7](http://johnalbin.github.io/fluid-grid-rounding-errors/images/ie7.png)
+</div>
+---
+
+class: center, middle
+# Display elements
+---
+
+# Hide element
+```css
+.hidden {
+    display: none;
+}
+```
+<i class="icon-frown"></i> Blinking!!!  
+```xml
+<div class="dialog hidden">My popup dialog</div>
+```
+
+<i class="icon-smile"></i> No blinking.
+```xml
+<div class="dialog" style="display: none">My popup dialog</div>
+```
+---
+
+# Blocks and inline
+```css
+.block {
+    display: block;
+}
+.inline {
+    display: inline;
+}
+```
+Inlines ignore width and height:
+```xml
+<div class="inline" style="width: 100px; height: 300px; border: 1px solid red;">Hello world!</div>
+```
+---
+
+# inline-block
+```xml
+<div class="menu">
+    <div class="menu-item">Hello</div>
+    <div class="menu-item">world!</div>
+</div>
+```
+```css
+.menu {
+    background-color: red;
+}
+.menu .menu-item {
+    display: inline-block;
+    background-color: lightgray;
+    padding: 1em;
+}
+```
+---
+
+class: menu-demo
+# Menu demo
+<div class="menu">
+    <div class="menu-item">Hello</div>
+    <div class="menu-item">world!</div>
+</div>
+
+<i class="icon-frown"></i> Whitespaces are taken into consideration.
+---
+
+# Fixing menu demo
+```xml
+<div class="menu">
+    <div class="menu-item">Hello</div><!--
+    --><div class="menu-item">world!</div>
+</div>
+```
+---
+
+class: menu-demo
+# Fixed menu demo
+<div class="menu">
+    <div class="menu-item">Hello</div><!--
+    --><div class="menu-item">world!</div>
+</div>
+---
+
+# Box sizing
+<div>
+    <div class="area-left">Left</div><!--
+    --><div class="area-right">Right</div>
+</div>
+```xml
+<div>
+    <div class="left">Left</div><!--
+    --><div class="right">Right</div>
+</div>
+```
+```css
+.area-left, .area-right {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+.area-left {
+  background-color: orange;
+}
+.area-right {
+  background-color: yellowgreen;
+}
+```
+---
+
+class: box-sizing-padding
+# Adding padding
+<div>
+    <div class="area-left">Left</div><!--
+    --><div class="area-right">Right</div>
+</div>
+```css
+.area-left, .area-right {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  padding: 1em;
+}
+```
+---
+
+class: box-sizing-fixed
+# Fixing demo
+<div>
+    <div class="area-left">Left</div><!--
+    --><div class="area-right">Right</div>
+</div>
+```css
+.area-left, .area-right {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  padding: 1em;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+```
+---
+
+# Tables
+```css
+.table {
+    display: table;
+}
+.table-cell {
+    display: table-cell;
+}
+```
+---
+
+class: menu-demo
+# Table menu demo
+<div class="menu-table">
+    <div class="menu-item">Hello</div>
+    <div class="menu-item">world!</div>
+</div>
+```xml
+<div class="menu-table">
+    <div class="menu-item">Hello</div>
+    <div class="menu-item">world!</div>
+</div>
+```
+```css
+.menu-table {
+    background-color: red;
+    display: table;
+}
+.menu-table .menu-item {
+    display: table-cell;
+    background-color: lightgray;
+    padding: 1em;
+}
+```
+---
+
+class: center, middle
+# <i class="icon-css3"></i> Media queries
+---
+
+# Looking at media queries
+A media query consists of a media type and at least one expression that limits the style sheets' scope by using media features,
+such as width, height, and color.
+
+```xml
+<link rel="stylesheet" media="(max-width: 800px)" href="example.css" />
+```
+```css
+@media (max-width: 600px) {
+  .facet_sidebar {
+    display: none;
+  }
+}
+```
+---
+
+# Operator *and*
+```css
+@media tv and (min-width: 700px) and (orientation: landscape) {
+    img { display: block; }
+}
+```
+---
+
+# Comma separated list
+Comma-separated lists behave like the logical operator or when used in media queries.
+
+```css
+@media (min-width: 700px), handheld and (orientation: landscape) { ... }
+```
+---
+
+
+# Operator *not*
+```css
+/* Example 1 */
+@media not all and (monochrome) { ... }
+```
+The same as:
+```css
+@media not (all and (monochrome)) { ... }
+```
+
+```css
+/* Example 2 */
+@media not screen and (color), print and (color)
+```
+The same as:
+```css
+@media (not (screen and (color))), print and (color)
+```
+---
+
+# Keyword *only*
+```xml
+<link rel="stylesheet" media="only screen and (color)" href="example.css" />
+```
+---
+
+class: center, middle
+# Making things responsive
+---
+
+# Strategy
+1. Mobile first
+2. Desktop first
+3. Responsive design
+---
+
+# Ways to achive
+1. CSS grids (display: inline-block)
+2. Other grids (http://masonry.desandro.com/)
+3. CSS3 media queries
+---
+
+class: center, middle
+# Fighting the reality
+---
+
+class: center, middle, big-css
+# Big CSS
+![](http://gridsetapp.com/blog/wp-content/uploads/2012/07/big-css.jpg)
+---
+
+# Dynamic stylesheets
+* http://lesscss.org/
+* http://sass-lang.com/
+* http://learnboost.github.io/stylus/
+
+```less
+/* Less example */
+@color: #4D926F;
+
+#header {
+  color: @color;
+}
+h2 {
+  color: @color;
+}
+```
+```css
+/* Compiled CSS */
+
+#header {
+  color: #4D926F;
+}
+h2 {
+  color: #4D926F;
+}
+```
+---
+
+# Tools
+* http://csslint.net/
+* Chrome dev tools (or FF tools)
+---
+
+class: center, middle
+# Goodbye
+    </textarea>
+    <footer>
+        <i class="icon-time"></i> <span id="time"></span>
+    </footer>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var slideshow = remark.create({
+            ratio : '16:9',
+            highlightLanguage : 'javascript',
+            highlightStyle : 'vs'
+        });
+    </script>
+    <script src="scripts/time.js"></script>
+    </body>
+</html>

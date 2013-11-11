@@ -14,4 +14,5 @@ footer {
     right: 10px;
     bottom: 0;
     color: #888;
+    z-index: 2;
 }
