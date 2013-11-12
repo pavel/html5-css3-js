@@ -202,6 +202,16 @@ li { color: green; }
 ```
 ---
 
+# !important
+
+```xml
+<li style="color: red">What's my color?</li>
+```
+```css
+li { color: green !important; }
+```
+---
+
 class: center, middle
 # Specificity tools
 http://specificity.keegan.st/  
@@ -280,27 +290,53 @@ They may obscure the contents of another box (or be obscured themselves), depend
 ```css
 .abs { position: absolute; }
 ```
-```xml
-<!-- #1 -->
-<div>
-    <div class="abs" style="left: 0; right: 0; top: 0; bottom: 0;">Hello</div>
-    <div style="text-align: right">world!</div>
-</div>
-```
-```xml
-<!-- #2 -->
-<div class="abs">
-    <div class="abs" style="left: 0; right: 0; top: 0; bottom: 0;">Hello</div>
-    <div style="text-align: right">world!</div>
-</div>
-```
-```xml
-<!-- #3 -->
-<div class="rel">
-    <div class="abs" style="left: 0; right: 0; top: 0; bottom: 0;">Hello</div>
-    <div style="text-align: right">world!</div>
-</div>
-```
+---
+
+class: center, middle
+# Stacking elements
+---
+
+# Default stacking rules
+* DIV #1
+* DIV #2
+* DIV #3
+* DIV #4
+* DIV #5
+
+![stacking](https://developer.mozilla.org/@api/deki/files/910/=understanding_zindex_01.png)
+---
+
+# Stacking and float
+* DIV #1
+* DIV #2
+* DIV #3
+* DIV #4
+* DIV #5
+
+![stack-and-float](https://developer.mozilla.org/@api/deki/files/911/=Understanding_zindex_02.png)
+---
+
+# z-index
+The z-index CSS property specifies the z-order of an element and its descendants.
+
+* DIV #1
+* DIV #2
+* DIV #3
+* DIV #4
+* DIV #5
+
+![z-index](https://developer.mozilla.org/@api/deki/files/912/=Understanding_zindex_03.png)
+---
+
+# Stacking context
+* DIV #1
+* DIV #2
+* DIV #3
+    * DIV #4
+    * DIV #5
+    * DIV #6
+
+![stacking-context](https://developer.mozilla.org/@api/deki/files/913/=Understanding_zindex_04.png)
 ---
 
 class: center, middle
@@ -644,6 +680,7 @@ h2 {
 
 # Tools
 * http://csslint.net/
+* http://caniuse.com/
 * Chrome dev tools (or FF tools)
 ---
 
